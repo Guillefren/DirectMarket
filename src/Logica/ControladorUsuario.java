@@ -32,10 +32,10 @@ public class ControladorUsuario {
     
         cliente c = new cliente();
         c.setDatos(nick, nombre, apellido, email, fnac, Imagen);
-        ListaClientes.add(c);
+        //ListaClientes.add(c);
         agregar ag = new agregar();
         ag.agregarcliente(c);
-       
+        
     }
     
     public void SetTipoUsuario(String t){
@@ -45,7 +45,7 @@ public class ControladorUsuario {
     
     Proveedor p = new Proveedor();
     p.setdatos(nick, nombre, apellido, email,fnac, Imagen, nombreComp,linkPag);
-    ListaProveedores.add(p);
+//    ListaProveedores.add(p);
     agregar ag = new agregar();
     ag.agregarproveedor(p);
     
@@ -143,14 +143,14 @@ public class ControladorUsuario {
     }
     
     
-    public List<OrdenCompra> ObtenerOrdenesdeCompra(){
+  /*  public List<OrdenDeCompra> ObtenerOrdenesdeCompra(){
     
     
     }
-    public dataOrden SeleccionarOrdenCompra(OrdenCompra oc){
+    public dataOrdenDeCompra SeleccionarOrdenCompra(OrdenDeCompra oc){
     
     
     
     }
-    
+    */
 }

@@ -31,5 +31,8 @@ public class Especificacion {
         this.listEsp.add(esp);
           
     }
+    public void setLista(List<String> l){
+    this.listEsp = l;
+    }
     
 }

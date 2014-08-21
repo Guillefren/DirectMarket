@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
 
 /**
  *
+ * 
+ * 
  * @author Agustin
  */
 public class conexion {
@@ -26,8 +28,8 @@ public class conexion {
   public Connection conexion;
     public void conectarBase(){
         try {
-            Class.forName("org.hsqldb.jdbcDriver");
-            conexion=DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/directmarket", "sa", "");
+            Class.forName("org.hsqldb.jdbc.JDBCDriver");
+            conexion=DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/DirectMarket", "sa", "");
             sentencia=conexion.createStatement();
            
            

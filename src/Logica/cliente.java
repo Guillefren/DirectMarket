@@ -18,7 +18,7 @@ public class cliente extends Usuario{
        nombre = null;
        apellido = null;
        email = null;
-      // fnac = null;
+        fnac = null;
        imagen = null;
       
    }

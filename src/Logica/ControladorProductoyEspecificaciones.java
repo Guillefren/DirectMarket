@@ -35,9 +35,9 @@ public class ControladorProductoyEspecificaciones {
          p.setDatosProd(Nombre, NumRef, Descripcion, Esp, precio, Imagen);
          ListaProductos.add(p);
           agregar ag = new agregar();
-          ag.agregarproducto(p);
+         // ag.agregarproducto(p);
           ag = new agregar();
-          ag.agregarEsp(Esp);
+         // ag.agregarEsp(Esp);
        
        
    }
@@ -47,9 +47,9 @@ public class ControladorProductoyEspecificaciones {
     public List<DataProducto> ListarProductos(){
         
     getLista gl = new getLista();
-    ListaProductos = gl.getListaProducto();
+   // ListaProductos = gl.getListaProducto();
     List<DataProducto> DataListaProducto = new LinkedList();
-        Iterator it = ListaProducto.iterator();
+        Iterator it = ListaProductos.iterator();
         while(it.hasNext()){
             if ( it instanceof producto){
                 producto pr  = new producto();
@@ -67,8 +67,8 @@ public class ControladorProductoyEspecificaciones {
           public producto SeleccionarProducto(String Nombre){
     
         getLista gl = new getLista();
-        ListaProductos = gl.getListaProducto();
-        Iterator it = ListaProducto.iterator();
+       // ListaProductos = gl.getListaProducto();
+        Iterator it = ListaProductos.iterator();
 
         while (it.hasNext()){
             if (it instanceof producto){
