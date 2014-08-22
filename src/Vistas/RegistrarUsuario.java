@@ -103,6 +103,11 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
         });
 
         jButton1.setText("Aceptar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -322,7 +327,7 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
         }
     }
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-       nick = jTextField1.getText();
+       
        
     }//GEN-LAST:event_jTextField1ActionPerformed
    
@@ -331,12 +336,7 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
         
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ControladorUsuario cu = new ControladorUsuario();
-        if(tipo == "c"){
-            cu.RegistrarCliente(nick, nom, ap, email, Fnacimiento, imagen);
-        }
-       else
-            cu.RegistrarProveedor(nick, nom, ap, email, Fnacimiento, imagen, nombrecomp, nick);
+       
         // segun el tipo llama a registrar cliente o proveedor
         //crear date con fecha que elige en jcalendar?
     // cu.RegistrarUsuario(nick, nom, ap, ap, nick, ap);
@@ -350,33 +350,34 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
-        email = jTextField2.getText();
+        
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
-         ap = jTextField4.getText();
+         
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
-        nom = jTextField3.getText();
+        
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jDateChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser1MouseClicked
         // TODO add your handling code here:
        
-        Fnacimiento = jDateChooser1.getDate();
+        
     }//GEN-LAST:event_jDateChooser1MouseClicked
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
        
-        imagen = jTextField5.getText();
+        
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
@@ -406,13 +407,13 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
         System.out.println("Urp!");
       }
     }*/
-        jRadioButton2.addItemListener(this);
+      /*  jRadioButton2.addItemListener(this);
         
         if(jRadioButton2.isSelected()== true){
            
             jTextField6.setVisible(true);
             jTextField7.setVisible(true);
-        }
+        }*/
         
         
     }//GEN-LAST:event_jRadioButton2MouseClicked
@@ -423,15 +424,35 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
-        nombrecomp = jTextField6.getText();
+        
         
         
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         // TODO add your handling code here:
-        sitioweb = jTextField7.getText();
+        
     }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        nick = jTextField1.getText();
+        sitioweb = jTextField7.getText();
+        nombrecomp = jTextField6.getText();
+        imagen = jTextField5.getText();
+        Fnacimiento = jDateChooser1.getDate();
+        nom = jTextField3.getText();
+        ap = jTextField4.getText();
+        email = jTextField2.getText();
+        
+         ControladorUsuario cu = new ControladorUsuario();
+        if("c".equals(tipo)){
+            cu.RegistrarCliente(nick, nom, ap, email, Fnacimiento, imagen);
+        }
+       else
+            cu.RegistrarProveedor(nick, nom, ap, email, Fnacimiento, imagen, nombrecomp, nick);
+        
+    }//GEN-LAST:event_jButton1MouseClicked
 
     
     

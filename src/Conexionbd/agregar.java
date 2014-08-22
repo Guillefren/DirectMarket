@@ -28,8 +28,9 @@ public class agregar {
          try {
            //  java.sql.Date.valueOf(cli.getNacimiento().toString())
          //cli.getNacimiento().getYear()+"-"+cli.getNacimiento().getMonth()+"-"+cli.getNacimiento().getDay()+
+           //  java.sql.Date sqlDate = new java.sql.Date();
              
-             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick, nombre, apellido,email,nacimiento,imagen)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+java.sql.Date.valueOf(cli.getNacimiento().toString())+"','"+cli.getImagen()+"'");
+             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick, nombre, apellido,email,nacimiento,imagen)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+java.sql.Date.valueOf(cli.getNacimiento().toString())+"','"+cli.getImagen()+"')");
          } catch (SQLException ex) {
              System.out.println("No se pudo agregar a Base de datos");
              Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
