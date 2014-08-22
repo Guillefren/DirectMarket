@@ -14,12 +14,7 @@ import java.util.*;
  */
 public class cliente extends Usuario{
    public cliente(){
-       nick = null;
-       nombre = null;
-       apellido = null;
-       email = null;
-        fnac = null;
-       imagen = null;
+       
       
    }
    
@@ -29,7 +24,7 @@ public class cliente extends Usuario{
    this.imagen = Imagen;
    this.nick = nick;
    this.nombre = nombre;
-  // this.fnac = null;
+  this.fnac = fnac;
    
    
    
@@ -41,15 +36,7 @@ public class cliente extends Usuario{
        this.apellido = ap;
      
    }
-   public String getNick(){
-       return nick;
-          }
-   public String getNombre(){
-       return nombre;
-     }
-   public String getApellido(){
-       return apellido;
-   }
+  
    public void setNick(String ni){
        this.nick = ni;
             }

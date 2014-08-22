@@ -95,7 +95,7 @@ class producto {
     public DataProducto getDataProd(){
    
    DataProducto dpr = new DataProducto();
-   dpr.setDataProd(Nombre, NumRef, Descripcion, Esp , precio, */Imagen);
+   dpr.setDataProd(Nombre, NumRef, Descripcion, Esp , /*precio,*/ Imagen);
    return dpr;
    }
 }

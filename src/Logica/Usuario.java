@@ -20,14 +20,37 @@ abstract class Usuario {
      
      public void Usuario(){
      
-     String nick = null;
-     String nombre = null;
-     String apellido = null;
-     String email = null;
-     Date fnac = new Date();
-     String imagen = null;
+              nick = "-";
+              nombre = "-";
+              apellido = "-";
+              email = "-";
+              fnac = new Date();
+              imagen = "-";
      
      }
-     
+      public String getNick(){
+       return nick;
+          }
+   public String getNombre(){
+       return nombre;
+     }
+   public String getApellido(){
+       return apellido;
+   }
+   
+   public String getEmail(){
+   
+   return email;
+   }
+   
+   public Date getNacimiento(){
+   
+   return fnac;
+   }
+   
+   public String getImagen(){
+   
+   return imagen;
+   }
      
  }

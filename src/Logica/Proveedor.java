@@ -16,6 +16,12 @@ public class Proveedor extends Usuario{
     private String nombreCompañia;
     private String linkPagina;
     
+    public void Proveedor(){
+    
+    nombreCompañia= "-";
+    linkPagina = "-";
+    
+    }
     public String getNombreCompañia(){
     
     return nombreCompañia;

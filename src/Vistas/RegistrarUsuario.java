@@ -38,8 +38,8 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
      */
     public RegistrarUsuario() {
         initComponents();
-        this.jTextField6.setVisible(false);
-        this.jTextField7.setVisible(false);
+       /* this.jTextField6.setVisible(false);
+        this.jTextField7.setVisible(false);*/
     }
 
     /**

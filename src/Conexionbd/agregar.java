@@ -9,9 +9,13 @@ import Logica.cliente;
 import Logica.Proveedor;
 import Logica.Compuesta;
 import Logica.Hoja;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Agustin
@@ -22,10 +26,12 @@ public class agregar {
      bd = new Conexionbd.conexion();
      bd.conectarBase();
          try {
+           //  java.sql.Date.valueOf(cli.getNacimiento().toString())
+         //cli.getNacimiento().getYear()+"-"+cli.getNacimiento().getMonth()+"-"+cli.getNacimiento().getDay()+
              
-             bd.sentencia.executeQuery("INSERT INTO CLIENTES(nick, nombre, apellido)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"')");
+             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick, nombre, apellido,email,nacimiento,imagen)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+java.sql.Date.valueOf(cli.getNacimiento().toString())+"','"+cli.getImagen()+"'");
          } catch (SQLException ex) {
-             System.out.println("la puta madre");
+             System.out.println("No se pudo agregar a Base de datos");
              Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
          }
          bd.desconectarBaseDeDatos();
@@ -39,9 +45,9 @@ public class agregar {
      bd.conectarBase();
          try {
              
-             bd.sentencia.executeQuery("INSERT INTO PROVEEDOR(nick, nombre, apellido)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"')");
+             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick, nombre, apellido,email,nacimiento,,nombrecompañia,sitioweb,imagen)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+java.sql.Date.valueOf(cli.getNacimiento().toString())+"','"+cli.getNombreCompañia()+"','"+cli.getLinkPagina()+"','"+cli.getImagen()+"')");
          } catch (SQLException ex) {
-             System.out.println("la puta madre");
+             System.out.println("No se pudo agregar a Base de datos");
              Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
          }
      
