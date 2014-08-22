@@ -450,7 +450,7 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
             cu.RegistrarCliente(nick, nom, ap, email, Fnacimiento, imagen);
         }
        else
-            cu.RegistrarProveedor(nick, nom, ap, email, Fnacimiento, imagen, nombrecomp, nick);
+            cu.RegistrarProveedor(nick, nom, ap, email, Fnacimiento, imagen, nombrecomp, sitioweb);
         
     }//GEN-LAST:event_jButton1MouseClicked
 

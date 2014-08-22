@@ -13,6 +13,7 @@ import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -28,9 +29,11 @@ public class agregar {
          try {
            //  java.sql.Date.valueOf(cli.getNacimiento().toString())
          //cli.getNacimiento().getYear()+"-"+cli.getNacimiento().getMonth()+"-"+cli.getNacimiento().getDay()+
-           //  java.sql.Date sqlDate = new java.sql.Date();
-             
-             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick, nombre, apellido,email,nacimiento,imagen)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+java.sql.Date.valueOf(cli.getNacimiento().toString())+"','"+cli.getImagen()+"')");
+           java.sql.Date fecha = new java.sql.Date(cli.getNacimiento().getTime());
+              
+              
+              //cal.getTime().getYear()+"-"+cal.getTime().getMonth()+"-"+cal.getTime().getDay()
+             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick, nombre, apellido,email,nacimiento,imagen)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+fecha+"','"+cli.getImagen()+"')");
          } catch (SQLException ex) {
              System.out.println("No se pudo agregar a Base de datos");
              Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,8 +48,8 @@ public class agregar {
      bd = new Conexionbd.conexion();
      bd.conectarBase();
          try {
-             
-             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick, nombre, apellido,email,nacimiento,,nombrecompañia,sitioweb,imagen)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+java.sql.Date.valueOf(cli.getNacimiento().toString())+"','"+cli.getNombreCompañia()+"','"+cli.getLinkPagina()+"','"+cli.getImagen()+"')");
+             java.sql.Date fecha = new java.sql.Date(cli.getNacimiento().getTime());
+             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick, nombre, apellido,email,nacimiento,nombrecompañia,sitioweb,imagen)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+fecha+"','"+cli.getNombreCompañia()+"','"+cli.getLinkPagina()+"','"+cli.getImagen()+"')");
          } catch (SQLException ex) {
              System.out.println("No se pudo agregar a Base de datos");
              Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
