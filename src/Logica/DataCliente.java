@@ -37,5 +37,20 @@ class DataCliente {
     this.nombre = nombre;
     
     }
+     public String getNick(){
+        return nick;
+    }
+    public String getNombre(){
+        return nombre;
+    }
+     public String getApellido(){
+        return apellido;
+    }
+    public String getEmail(){
+        return email;
+    }
+    public String getImagen(){
+        return imagen;
+    }
     
 }
