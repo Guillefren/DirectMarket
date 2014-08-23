@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 import Logica.Hoja;
 import Logica.Compuesta;
+import java.sql.SQLException;
 /**
  *
  * @author Agustin
@@ -23,13 +24,16 @@ public class getLista {
         Conexionbd.conexion bd = new Conexionbd.conexion();
         try{
             bd.conectarBase();
-            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CLIENTES");
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM USUARIOS WHERE TIPO = 'C'");
             while (rs.next()){
-                cliente cli = new cliente();
-                ListaCliente.add(cli);
+               
+                cliente clie = new cliente();
+                int cont = rs.getRow();
+                clie = (cliente) rs.getObject(cont);
+                ListaCliente.add(clie);
                 
             }
-        }catch (Exception e){
+        }catch (SQLException e){
             
         }
         bd.desconectarBaseDeDatos();
@@ -43,9 +47,11 @@ public class getLista {
         Conexionbd.conexion bd = new Conexionbd.conexion();
         try{
             bd.conectarBase();
-            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM PROVEEDOR");
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM USUARIOS WHERE TIPO = 'P'");
             while (rs.next()){
                 Proveedor prov = new Proveedor();
+                int cont = rs.getRow();
+                prov = (Proveedor) rs.getObject(cont);
                 ListaProveedor.add(prov);
                 
                 
@@ -65,7 +71,7 @@ public class getLista {
         Conexionbd.conexion bd = new Conexionbd.conexion();
         try{
             bd.conectarBase();
-            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CLIENTES");
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CATEGORIAS");
             while (rs.next()){
                 Hoja hoj = new Hoja();
                 ListaHoja.add(hoj);
@@ -86,7 +92,7 @@ public class getLista {
         Conexionbd.conexion bd = new Conexionbd.conexion();
         try{
             bd.conectarBase();
-            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CLIENTES");
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CATEGORIAS");
             while (rs.next()){
                 Compuesta com = new Compuesta();
                 ListaCompuesta.add(com);

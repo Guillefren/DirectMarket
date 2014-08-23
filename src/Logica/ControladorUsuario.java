@@ -14,14 +14,14 @@ import Conexionbd.*;
 public class ControladorUsuario {
     
     
-    private List ListaClientes;
-    private List ListaProveedores;
+    private List<cliente> ListaClientes;
+    private List<Proveedor> ListaProveedores;
     
     
     public void ControladorUsuario(){
         
-    List<cliente> ListaClientes = new LinkedList();
-    List<Proveedor> ListaProveedores = new LinkedList();
+     ListaClientes = new LinkedList();
+    ListaProveedores = new LinkedList();
     
     
     // sintaxis List<Persona> listalinked = new LinkedList<Persona>();
@@ -107,7 +107,7 @@ public class ControladorUsuario {
         while(it.hasNext()){
             if ( it instanceof Proveedor){
                 Proveedor p = new Proveedor();
-                p = (Proveedor) it;
+                p = (Proveedor)it;
                 dp = p.getData();
                 dataListaProveedores.add(dp);
             
