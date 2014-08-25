@@ -7,25 +7,28 @@
 package Logica;
 
 import Conexionbd.agregar;
+import Logica.DataProducto;
+import Logica.Especificacion;
 
 /**
  *
  * @author Usuario
  */
-class producto {
+public class producto {
     private String Nombre;
     private int NumRef;
     private String Descripcion;
     private Especificacion Esp;
-    //private Money Precio;
+    private Money Prec;
     private String Imagen;
     
     public producto(){
         Nombre= null;
         Descripcion = null;
+        
         Imagen = null;
         Esp = null;
-      //  Money precio = null; 
+      Prec = null; 
        
     }
     public void setDatosProd(String Nombre, int NumRef, String Descripcion, Especificacion Especif , Money precio, String Imagen){
@@ -33,11 +36,11 @@ class producto {
         this.NumRef = NumRef;
         this.Descripcion = Descripcion;
         this.Esp = Especif;
-      //  this.Precio = Precio;
+      this.Prec = precio;
         
     }
     
-    public producto(String nom, int numRef, String desc,/* ListaEspecificaciones listEsp, Money prec, */String imag){
+    /* public producto(String nom, int numRef, String desc, ListaEspecificaciones listEsp, Money prec, String imag){
         this.Nombre= nom;
         this.NumRef= numRef;
         this.Descripcion= desc;
@@ -45,7 +48,7 @@ class producto {
         this.Imagen =imag;
       
       
-    }
+    }*/
     
     public String getNombre(){
        return Nombre;
@@ -59,6 +62,16 @@ class producto {
     public Especificacion getEsp(){
         return Esp;
     }
+
+    public Money getPrecio() {
+        return Prec;
+    }
+
+    public void setPrecio(Money Prec) {
+        this.Prec = Prec;
+    }
+    
+    
   /*  public Money getPrecio(){
        return Precio;
           }*/
@@ -77,9 +90,9 @@ class producto {
     public void setEsp(Especificacion Esp){
        this.Esp= Esp;
             }
-    public void setPrecio(Money prec){
-//       this.Precio = prec;
-            }
+    /*public void setPrecio(Money prec){
+      this.Prec = prec;
+            }*/
     public void setImagen(String imag){
        this.Imagen = imag;
             }
@@ -87,7 +100,7 @@ class producto {
       public void agregarProd(producto pro){
        agregar ag;
        ag = new agregar();
-     //  ag.agregarProducto(pro);
+      ag.agregarproducto(pro);
        
        
    }
@@ -95,7 +108,7 @@ class producto {
     public DataProducto getDataProd(){
    
    DataProducto dpr = new DataProducto();
-   dpr.setDataProd(Nombre, NumRef, Descripcion, Esp , /*precio,*/ Imagen);
+   dpr.setDataProd(Nombre, NumRef, Descripcion, Esp , Prec, Imagen);
    return dpr;
    }
 }
