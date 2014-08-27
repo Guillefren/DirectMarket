@@ -13,30 +13,24 @@ import java.util.*;
  * @author Agustin
  */
 public class cliente extends Usuario{
+         
    public cliente(){
-       
-      
-   }
+    }
    
    public void setDatos(String nick, String nombre, String apellido, String email, Date fnac, String Imagen){
-   this.apellido = apellido;
-   this.email = email;
-   this.imagen = Imagen;
-   this.nick = nick;
-   this.nombre = nombre;
-  this.fnac = fnac;
-   
-   
-   
+        this.apellido = apellido;
+        this.email = email;
+        this.imagen = Imagen;
+        this.nick = nick;
+        this.nombre = nombre;
+        this.fnac = fnac;   
    }
    public cliente(String ni,String nom, String ap){
         
        this.nick = ni;
        this.nombre = nom;
        this.apellido = ap;
-     
    }
-  
    public void setNick(String ni){
        this.nick = ni;
             }
@@ -56,13 +50,16 @@ public class cliente extends Usuario{
        
        agregar ag = new agregar();
        ag.agregarcliente(cli);
-       
-       
    }
-   public DataCliente getData(){
    
-   DataCliente dc = new DataCliente();
-   dc.setDatos(nick, nombre, apellido, email, imagen);
-   return dc;
+   public DataCliente getData(){
+        DataCliente dc = new DataCliente();
+        dc.setDatos(nick, nombre, apellido, email, imagen);
+        return dc;
    }
+   
+
+   
+   
+   
 }
