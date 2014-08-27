@@ -29,11 +29,9 @@ public class conexion {
     public void conectarBase(){
         try {
             Class.forName("org.hsqldb.jdbc.JDBCDriver");
-            conexion=DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/DirectMarket", "sa", "");
+            conexion=DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/directmarket", "sa", "");
             sentencia=conexion.createStatement();
-           
-           
-            
+                      
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null,"Error carga de driver");

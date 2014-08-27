@@ -11,7 +11,7 @@ import Logica.cliente;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-
+import Logica.DataCliente;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -229,7 +229,7 @@ public class VerInformacionCliente extends javax.swing.JFrame {
         jTextFieldApellido.setText(dccli.getApellido());
         jTextFieldEmail.setText(dccli.getEmail());
         String img = (String) dccli.getImagen();
-        ImageIcon image = new ImageIcon("C:/Users/Agustin/Documents/NetBeansProjects/DirectMarket/src/img/"+img+"");
+        ImageIcon image = new ImageIcon("C:/Users/Agustin/Documents/NetBeansProjects/DirectMarket2/src/img/"+img+"");
         jLabel9.setIcon(image);
     }
     

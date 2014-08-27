@@ -58,41 +58,29 @@ public class ControladorUsuario {
     public List<DataCliente> ListarClientes(){
         
     getLista gl = new getLista();
-    ListaClientes = gl.getListaCliente();
+    LinkedList<cliente> clientes = gl.getListaCliente();
     List<DataCliente> DataListaClientes = new LinkedList();
     DataCliente dc = new DataCliente();
-        Iterator it = ListaClientes.iterator();
-        while(it.hasNext()){
-            if ( it instanceof cliente){
+        for(int i=0; i<clientes.size(); i++){
                 cliente cc  = new cliente();
-                cc = (cliente) it;
+                cc = clientes.get(i);
                 dc = cc.getData();
                 DataListaClientes.add(dc);
-            
-            }
-            it.next();
-         }
+        }
+    
         return DataListaClientes;
             // no se si esta devolviendo bien la lista  
     }
     
     public cliente SeleccionarCliente(String nick){
     
-        getLista gl = new getLista();
-        ListaClientes = gl.getListaCliente();
-        Iterator it = ListaClientes.iterator();
-
-        while (it.hasNext()){
-            if (it instanceof cliente){
-                cliente c = new cliente();
-                c = (cliente)it;
-                if (c.getNick()== nick)
-                    return c;
-
-            }
-            it.next();
-
-        }
+         getLista gl = new getLista();
+         ListaClientes = gl.getListaCliente();
+         for (int i=0; i<ListaClientes.size(); i++){
+                if (ListaClientes.get(i).nick == nick){
+                    return ListaClientes.get(i);
+                 }
+              }
         return null;
     }
     

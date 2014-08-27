@@ -46,7 +46,12 @@ public class cliente extends Usuario{
    public void setApellido(String ap){
         this.apellido = ap;
    }
-
+    public void setEmail(String em){
+        this.email = em;
+   }
+   public void setImagen(String im){
+        this.imagen = im;
+   }
    public void agregarCli(cliente cli){
        
        agregar ag = new agregar();

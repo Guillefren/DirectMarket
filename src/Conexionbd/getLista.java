@@ -13,34 +13,37 @@ import java.util.LinkedList;
 import Logica.Hoja;
 import Logica.Compuesta;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Agustin
  */
 public class getLista {
     
-    public LinkedList<cliente> getListaCliente(){
+        public LinkedList<cliente> getListaCliente(){
         LinkedList<cliente> ListaCliente = new LinkedList();
         Conexionbd.conexion bd = new Conexionbd.conexion();
         try{
             bd.conectarBase();
-            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM USUARIOS WHERE TIPO = 'C'");
+            //ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM USUARIOS WHERE TIPO = 'C'");
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM USUARIOS");
             while (rs.next()){
-               
-                cliente clie = new cliente();
-                int cont = rs.getRow();
-                clie = (cliente) rs.getObject(cont);
-                ListaCliente.add(clie);
-                
-            }
+                cliente cli = new cliente();
+                cli.setNick(rs.getString("NICK"));
+                cli.setNombre(rs.getString("NOMBRE"));
+                cli.setApellido(rs.getString("APELLIDO"));
+                cli.setEmail(rs.getString("EMAIL"));
+                cli.setImagen(rs.getString("IMAGEN"));
+                ListaCliente.add(cli);
+                 }
         }catch (SQLException e){
             
         }
         bd.desconectarBaseDeDatos();
         
         return ListaCliente;
-    
-    }
+        }
     
     public LinkedList<Proveedor> getListaProveedor(){
         LinkedList<Proveedor> ListaProveedor = new LinkedList();
