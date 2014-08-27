@@ -10,6 +10,30 @@ package Logica;
  *
  * @author Agustin
  */
-class Money {
+public class Money {
+    private int valor;
+    private String tipo;
+    
+    public void Money(){
+      valor = 0;
+      tipo = null;
+    }
+
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
     
 }
