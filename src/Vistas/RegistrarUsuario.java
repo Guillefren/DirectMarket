@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author Agustin
@@ -41,6 +41,23 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
        /* this.jTextField6.setVisible(false);
         this.jTextField7.setVisible(false);*/
     }
+    public boolean CampoVacio(String nick, String nom,String ap,String email,String tipo,String nombrecomp,String sitioweb,String imagen,Date Fnacimiento){
+    
+        
+        if(tipo == "C"){
+         if(nick.isEmpty() || nom.isEmpty() || ap.isEmpty() || email.isEmpty() || Fnacimiento == null || imagen.isEmpty()){
+                            return true;
+                               }
+        }
+        if(tipo == "P"){
+         if(nick.isEmpty() || nom.isEmpty() || ap.isEmpty() || email.isEmpty() || Fnacimiento == null || imagen.isEmpty() || nombrecomp.isEmpty() || sitioweb.isEmpty()){
+                            return true;
+                                    }
+         
+        }
+     
+        return false;                                      
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,6 +70,8 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
 
         jFileChooser1 = new javax.swing.JFileChooser();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        popupMenu1 = new java.awt.PopupMenu();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -75,6 +94,8 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
+
+        popupMenu1.setLabel("popupMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -392,12 +413,12 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
 
     private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
         // TODO add your handling code here:
-        tipo = "c";
+        tipo = "C";
     }//GEN-LAST:event_jRadioButton1MouseClicked
 
     private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
         // TODO add your handling code here:
-        tipo = "p";
+        tipo = "P";
         /*new ActionListener(  ) {
       public void actionPerformed(ActionEvent ae) {
         System.out.println("Urp!");
@@ -440,14 +461,27 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
         nom = jTextField3.getText();
         ap = jTextField4.getText();
         email = jTextField2.getText();
-        
-         ControladorUsuario cu = new ControladorUsuario();
-        if("c".equals(tipo)){
-            cu.RegistrarCliente(nick, nom, ap, email, Fnacimiento, imagen);
-        }
-       else
-            cu.RegistrarProveedor(nick, nom, ap, email, Fnacimiento, imagen, nombrecomp, sitioweb);
-        
+          ControladorUsuario cu = new ControladorUsuario();
+          
+       
+    
+      if(CampoVacio(nick,nom,ap,email,tipo,nombrecomp,sitioweb,imagen,Fnacimiento) == false){   
+         if(cu.existeCliente(nick, email) == false){
+                        if(tipo == "C"){
+                           
+                             cu.RegistrarCliente(nick, nom, ap, email, Fnacimiento, imagen);
+                        }
+                       if(tipo == "P"){
+                            
+                            
+                        cu.RegistrarProveedor(nick, nom, ap, email, Fnacimiento, imagen, nombrecomp, sitioweb);
+                       }
+                       
+         }else  JOptionPane.showMessageDialog(rootPane, "Nick o Email ya ingresado");
+         
+      } else   JOptionPane.showMessageDialog(rootPane, "Alguno de los campos es vacio", "Error", JOptionPane.ERROR_MESSAGE); 
+       
+         
     }//GEN-LAST:event_jButton1MouseClicked
 
     
@@ -503,6 +537,7 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextField jTextField1;
@@ -512,5 +547,6 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
 }

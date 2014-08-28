@@ -90,7 +90,7 @@ public class getLista {
         Conexionbd.conexion bd = new Conexionbd.conexion();
         try{
             bd.conectarBase();
-            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CATEGORIAS");
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CATEGORIA");
             while (rs.next()){
                 Hoja hoj = new Hoja();
                 ListaHoja.add(hoj);

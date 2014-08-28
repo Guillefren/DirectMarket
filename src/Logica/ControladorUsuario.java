@@ -132,6 +132,20 @@ public class ControladorUsuario {
         return null;
         }
     
+     public boolean existeCliente(String nick, String email){
+     
+     getLista g = new getLista();
+     ListaClientes = g.getListaCliente();
+     
+     for(int i = 0;i<ListaClientes.size();i++){
+     
+         if(ListaClientes.get(i).getNick().equals(nick) || ListaClientes.get(i).getEmail().equals(email)){
+         
+             return true;
+         }
+     }
+     return false;
+     }
     
   /*  public List<OrdenDeCompra> ObtenerOrdenesdeCompra(){
     

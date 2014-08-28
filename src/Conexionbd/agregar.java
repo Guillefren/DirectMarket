@@ -31,10 +31,10 @@ public class agregar {
            //  java.sql.Date.valueOf(cli.getNacimiento().toString())
          //cli.getNacimiento().getYear()+"-"+cli.getNacimiento().getMonth()+"-"+cli.getNacimiento().getDay()+
            java.sql.Date fecha = new java.sql.Date(cli.getNacimiento().getTime());
-              
+            String tipo = "C";  
               
               //cal.getTime().getYear()+"-"+cal.getTime().getMonth()+"-"+cal.getTime().getDay()
-             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick, nombre, apellido,email,nacimiento,imagen)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+fecha+"','"+cli.getImagen()+"')");
+             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick, nombre, apellido,email,nacimiento,imagen,tipo)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+fecha+"','"+cli.getImagen()+"','"+tipo+"')");
          } catch (SQLException ex) {
              System.out.println("No se pudo agregar a Base de datos");
              Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,8 +49,9 @@ public class agregar {
      bd = new Conexionbd.conexion();
      bd.conectarBase();
          try {
+             String tipo = "P";
              java.sql.Date fecha = new java.sql.Date(cli.getNacimiento().getTime());
-             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick, nombre, apellido,email,nacimiento,nombrecompañia,sitioweb,imagen)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+fecha+"','"+cli.getNombreCompañia()+"','"+cli.getLinkPagina()+"','"+cli.getImagen()+"')");
+             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick, nombre, apellido,email,nacimiento,nombrecompañia,sitioweb,imagen,tipo)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+fecha+"','"+cli.getNombreCompañia()+"','"+cli.getLinkPagina()+"','"+cli.getImagen()+"','"+tipo+"')");
          } catch (SQLException ex) {
              System.out.println("No se pudo agregar a Base de datos");
              Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
