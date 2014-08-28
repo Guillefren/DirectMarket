@@ -31,6 +31,26 @@ abstract class Usuario {
       public String getNick(){
        return nick;
           }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
    public String getNombre(){
        return nombre;
      }
@@ -47,6 +67,14 @@ abstract class Usuario {
    
    return fnac;
    }
+
+    public Date getFnac() {
+        return fnac;
+    }
+
+    public void setFnac(Date fnac) {
+        this.fnac = fnac;
+    }
    
    public String getImagen(){
    

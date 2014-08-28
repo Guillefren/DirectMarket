@@ -31,33 +31,19 @@ public class cliente extends Usuario{
        this.nombre = nom;
        this.apellido = ap;
    }
-   public void setNick(String ni){
-       this.nick = ni;
-            }
-   public void setNombre(String nom){
-       this.nombre = nom;
-   }
-   public void setApellido(String ap){
-        this.apellido = ap;
-   }
-    public void setEmail(String em){
-        this.email = em;
-   }
-   public void setImagen(String im){
-        this.imagen = im;
-   }
+
    public void agregarCli(cliente cli){
        
        agregar ag = new agregar();
        ag.agregarcliente(cli);
    }
    
-   public DataCliente getData(){
-        DataCliente dc = new DataCliente();
-        dc.setDatos(nick, nombre, apellido, email, imagen);
-        return dc;
+    public DataCliente getData(){
+            DataCliente dc = new DataCliente();
+             
+            dc.setDatos(nick, nombre, apellido, email, fnac, imagen);
+   return dc;
    }
-   
 
    
    

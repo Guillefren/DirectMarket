@@ -84,51 +84,53 @@ public class ControladorUsuario {
         return null;
     }
     
-    public List<DataProveedor> ListarProveedores(){
+   public List<DataProveedor> ListarProveedores(){
         
         List<DataProveedor> dataListaProveedores = new LinkedList();
         getLista gl = new getLista();
         ListaProveedores = gl.getListaProveedor();
+        if(ListaProveedores.isEmpty()){
         
-        Iterator it = ListaProveedores.iterator();
+        System.out.print("la lista provedores no tiene objetos");
+        }
+        
+        
         DataProveedor dp = new DataProveedor();
-        while(it.hasNext()){
-            if ( it instanceof Proveedor){
-                Proveedor p = new Proveedor();
-                p = (Proveedor)it;
+
+        for(int i = 0;i < ListaProveedores.size();i++){
+            System.out.print("  entro en el dataiterador  ");
+                Proveedor p =ListaProveedores.get(i);
+
                 dp = p.getData();
                 dataListaProveedores.add(dp);
-            
-            }
-            it.next();
+           
         
         }
-      
+      if(dataListaProveedores.isEmpty()){
+      System.out.print("el data lista no tiene nada");
+      }
     return dataListaProveedores;
     }
     
     
-    public DataProveedor SeleccionarProveedor(String nick){
+     public DataProveedor SeleccionarProveedor(String nick){
         
-        getLista gl = new getLista();
+         getLista gl = new getLista();
         ListaProveedores = gl.getListaProveedor();
         
-       Iterator it = ListaProveedores.iterator();
-       
-       for(int i=0; i<=ListaProveedores.size();i++){
-           Proveedor p = new Proveedor();
-            if(it instanceof Proveedor){
-                
-                p = (Proveedor)it;
-                if (p.getNick() == nick){
-                    DataProveedor dp = new DataProveedor();
-                    dp = p.getData();
+
+        for(int i = 0;i<ListaProveedores.size();i++){
+            
+                Proveedor p =new Proveedor();
+                p = ListaProveedores.get(i);
+                if (p.getNick()== nick){
+                    DataProveedor dp = p.getData();
                     return dp;
                 }
-            } 
-       }
-    return null;
-    }
+            }
+            
+        return null;
+        }
     
     
   /*  public List<OrdenDeCompra> ObtenerOrdenesdeCompra(){

@@ -61,30 +61,13 @@ public class Proveedor extends Usuario{
        this.nombreCompañia = nc;
      
    }
-   public String getNick(){
-       return nick;
-          }
-   public String getNombre(){
-       return nombre;
-     }
-   public String getApellido(){
-       return apellido;
-   }
-   public void setNick(String ni){
-       this.nick = ni;
-            }
-   public void setNombre(String nom){
-       this.nombre = nom;
-   }
-   public void setApellido(String ap){
-        this.apellido = ap;
-   }
+   
     
    public void setdatos(String nick, String nombre, String apellido, String email, Date fnac, String Imagen, String nc, String lp){
 
    this.apellido = apellido;
    this.email = email;
-   this.imagen = imagen;
+   this.imagen = Imagen;
    this.linkPagina = lp;
    this.nick = nick;
    this.nombre = nombre;
@@ -95,7 +78,7 @@ public class Proveedor extends Usuario{
    public DataProveedor getData(){
    
        DataProveedor dp = new DataProveedor();
-       dp.setDatos(nick, nombre, apellido, email,fnac.toString(), linkPagina, nombreCompañia, imagen);
+       dp.setDatos(nick, nombre, apellido, email, fnac, linkPagina, nombreCompañia, imagen);
        return dp;
    }
    

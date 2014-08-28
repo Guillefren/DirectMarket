@@ -438,7 +438,7 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
         sitioweb = jTextField7.getText();
         nombrecomp = jTextField6.getText();
         imagen = jTextField5.getText();
-        Fnacimiento = jDateChooser1.getDate();
+        Fnacimiento = jDateChooser2.getDate();
         nom = jTextField3.getText();
         ap = jTextField4.getText();
         email = jTextField2.getText();

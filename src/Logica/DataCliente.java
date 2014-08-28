@@ -6,6 +6,8 @@
 
 package Logica;
 
+import java.util.Date;
+
 /**
  *
  * @author Agustin
@@ -15,17 +17,17 @@ public class DataCliente {
     private String nombre;
     private String apellido;
     private String email;
-    private String fnac;
+    private Date fnac;
     private String imagen;
     
     
     public void DataCliente(){
-    nick = null;
-    nombre = null;
-    apellido = null;
-    email = null;
-    //fnac = null;
-    imagen = null;
+    nick = "-";
+    nombre = "-";
+    apellido = "-";
+    email = "-";
+    fnac = new Date();
+    imagen = "-";
     }
     
     public String getNick(){
@@ -44,12 +46,17 @@ public class DataCliente {
         return imagen;
     }
     
-    public void setDatos(String nick, String nombre, String apellido, String email, /*date fnac*/ String imagen){
+    public Date getFnac(){
+    
+        return fnac;
+    }
+    public void setDatos(String nick, String nombre, String apellido, String email, Date fnaci, String imagen){
     
     this.apellido = apellido;
     this.email = email;
     this.imagen = imagen;
     this.nick = nick;
+    fnac = fnaci;
     this.nombre = nombre;
     
     }

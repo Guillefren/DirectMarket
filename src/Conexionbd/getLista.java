@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import Logica.Hoja;
 import Logica.Compuesta;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -35,6 +36,9 @@ public class getLista {
                 cli.setApellido(rs.getString("APELLIDO"));
                 cli.setEmail(rs.getString("EMAIL"));
                 cli.setImagen(rs.getString("IMAGEN"));
+                java.sql.Date sqldate = rs.getDate("Nacimiento");
+                Date d = new Date(sqldate.getTime());
+                cli.setFnac(d);
                 ListaCliente.add(cli);
                  }
         }catch (SQLException e){
@@ -45,7 +49,7 @@ public class getLista {
         return ListaCliente;
         }
     
-    public LinkedList<Proveedor> getListaProveedor(){
+   public LinkedList<Proveedor> getListaProveedor(){
         LinkedList<Proveedor> ListaProveedor = new LinkedList();
         Conexionbd.conexion bd = new Conexionbd.conexion();
         try{
@@ -53,8 +57,19 @@ public class getLista {
             ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM USUARIOS WHERE TIPO = 'P'");
             while (rs.next()){
                 Proveedor prov = new Proveedor();
-                int cont = rs.getRow();
-                prov = (Proveedor) rs.getObject(cont);
+               
+                prov.setNick(rs.getString("Nick"));
+                prov.setApellido(rs.getString("Apellido"));
+                prov.setEmail(rs.getString("Email"));
+                prov.setImagen(rs.getString("Imagen"));
+                prov.setLinkPagina(rs.getString("SitioWeb"));
+                prov.setNombre(rs.getString("Nombre"));
+                prov.setNombreCompañia(rs.getString("NombreCompañia"));
+                
+                java.sql.Date sqldate = rs.getDate("Nacimiento");
+                Date d = new Date(sqldate.getTime());
+                prov.setFnac(d);
+                
                 ListaProveedor.add(prov);
                 
                 
@@ -67,6 +82,7 @@ public class getLista {
         return ListaProveedor;
     
     }
+    
     
     
     public LinkedList<Hoja> getListaHoja(){

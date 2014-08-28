@@ -6,20 +6,35 @@
 
 package Logica;
 
+import java.util.Date;
+
 /**
  *
  * @author Guilleeu
  */
-class DataProveedor {
+public class DataProveedor {
     
     String apellido;
     String email;
-    String fnac;
+    Date fnac;
     String linkPagina;
     String nombreCompañia;
     String imagen;
     String nick;
     String nombre;
+    
+    public void DataProveedor(){
+    nick = "-";
+    nombre = "-";
+    apellido = "-";
+    email ="-";
+    fnac = new Date();
+    linkPagina = "-";
+    nombreCompañia = "-";
+    imagen = "-";
+    
+    }
+    
 
     public String getNick() {
         return nick;
@@ -53,11 +68,11 @@ class DataProveedor {
         this.email = email;
     }
 
-    public String getFnac() {
+    public Date getFnac() {
         return fnac;
     }
 
-    public void setFnac(String fnac) {
+    public void setFnac(Date fnac) {
         this.fnac = fnac;
     }
 
@@ -86,19 +101,7 @@ class DataProveedor {
     }
     
     
-    public void DataProveedor(){
-    nick = null;
-    nombre = null;
-    apellido = null;
-    email = null;
-    fnac = null;
-    linkPagina = null;
-    nombreCompañia = null;
-    imagen = null;
-    
-    }
-    
-   public void setDatos(String nick,String nombre, String apellido, String email,String fnac, String linkPagina,String nombreCompañia,String imagen){
+   public void setDatos(String nick,String nombre, String apellido, String email,Date fnac, String linkPagina,String nombreCompañia,String imagen){
    
        this.nick = nick;
        this.apellido = apellido;

@@ -9,6 +9,7 @@ import Logica.cliente;
 import Logica.Proveedor;
 import Logica.Compuesta;
 import Logica.Hoja;
+import Logica.producto;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -93,6 +94,19 @@ public class agregar {
      
      
      }
+     public void agregarproducto(producto p) {
+         
+             Conexionbd.conexion bd;
+             bd = new Conexionbd.conexion();
+             bd.conectarBase();
+             try {
+             bd.sentencia.executeQuery("INSERT INTO PRODUCTO(Nombre, NumRef,Descripcion, precio,Imagen)VALUES('"+p.getNombre()+"','"+p.getNumRef()+"','"+p.getDescripcion()+"','"+p.getPrecio()+"','"+p.getImagen()+"')");
+             
+             bd.desconectarBaseDeDatos();
+         } catch (SQLException ex) {
+             Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }
      
      
 }

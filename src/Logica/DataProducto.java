@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Logica;
 
 /**
@@ -16,23 +10,23 @@ class DataProducto {
     private int NumRef;
     private String Descripcion;
     private Especificacion Esp;
-    //private Money Precio;
+    private Money Precio;
     private String Imagen;
     
     public void DataProducto(){
         Nombre=null;
         Descripcion=null;
         Esp=null;
-        //Precio;
+        Precio = null;
         Imagen=null;
     }
 
-    void setDataProd(String Nombre, int NumRef, String Descripcion, Especificacion Especif, String Imagen) {
+    void setDataProd(String Nombre, int NumRef, String Descripcion, Especificacion Especif, Money Prec, String Imagen) {
         this.Nombre=Nombre;
         this.NumRef=NumRef;
         this.Descripcion=Descripcion;
         this.Esp=Especif;
-        //private Money Precio;
+      this.Precio = Prec;
          this.Imagen=Imagen;
     }
     

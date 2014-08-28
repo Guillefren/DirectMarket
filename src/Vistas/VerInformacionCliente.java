@@ -228,6 +228,7 @@ public class VerInformacionCliente extends javax.swing.JFrame {
         jTextFieldNombre.setText(dccli.getNombre());
         jTextFieldApellido.setText(dccli.getApellido());
         jTextFieldEmail.setText(dccli.getEmail());
+        this.jTextField4.setText(dccli.getFnac().toString());
         String img = (String) dccli.getImagen();
         ImageIcon image = new ImageIcon("C:/Users/Agustin/Documents/NetBeansProjects/DirectMarket2/src/img/"+img+"");
         jLabel9.setIcon(image);
