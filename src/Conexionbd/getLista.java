@@ -16,11 +16,14 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Agustin
  */
 public class getLista {
+    
+   
     
         public LinkedList<cliente> getListaCliente(){
         LinkedList<cliente> ListaCliente = new LinkedList();
@@ -28,7 +31,7 @@ public class getLista {
         try{
             bd.conectarBase();
             //ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM USUARIOS WHERE TIPO = 'C'");
-            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM USUARIOS");
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM USUARIOS WHERE TIPO = 'c'");
             while (rs.next()){
                 cliente cli = new cliente();
                 cli.setNick(rs.getString("NICK"));
@@ -39,6 +42,7 @@ public class getLista {
                 java.sql.Date sqldate = rs.getDate("Nacimiento");
                 Date d = new Date(sqldate.getTime());
                 cli.setFnac(d);
+                //System.out.print(cli.getData().getNombre());
                 ListaCliente.add(cli);
                  }
         }catch (SQLException e){
@@ -54,7 +58,7 @@ public class getLista {
         Conexionbd.conexion bd = new Conexionbd.conexion();
         try{
             bd.conectarBase();
-            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM USUARIOS WHERE TIPO = 'P'");
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM USUARIOS WHERE TIPO = 'p'");
             while (rs.next()){
                 Proveedor prov = new Proveedor();
                
@@ -88,17 +92,25 @@ public class getLista {
     public LinkedList<Hoja> getListaHoja(){
         LinkedList<Hoja> ListaHoja = new LinkedList();
         Conexionbd.conexion bd = new Conexionbd.conexion();
-        try{
+        
             bd.conectarBase();
-            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CATEGORIAS");
-            while (rs.next()){
-                Hoja hoj = new Hoja();
-                ListaHoja.add(hoj);
-                
+            ResultSet rs;
+            try {
+                rs = bd.sentencia.executeQuery("SELECT * FROM CATEGORIA WHERE TIPO = 'h'");
+                while (rs.next()){
+                    Hoja hoj = new Hoja();
+                    JOptionPane.showMessageDialog(null, rs.getString("NOMBRE"));
+                    hoj.SetNombre(rs.getString("NOMBRE"));
+                    JOptionPane.showMessageDialog(null, hoj.getNombre());
+                    hoj.setPadre(rs.getString("PADRE"));
+                    
+                    ListaHoja.add(hoj);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(getLista.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }catch (Exception e){
             
-        }
+       
         bd.desconectarBaseDeDatos();
         
         return ListaHoja;

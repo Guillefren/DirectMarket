@@ -44,6 +44,7 @@ public class cliente extends Usuario{
             dc.setDatos(nick, nombre, apellido, email, fnac, imagen);
    return dc;
    }
+    
 
    
    
