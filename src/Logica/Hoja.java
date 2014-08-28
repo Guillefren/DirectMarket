@@ -12,29 +12,32 @@ package Logica;
  */
 public class Hoja extends Categoria {
     
-   private String nombre;
+    private String nombre;
+    private String padre;
     
-    
-    
- public void Hoja(){
-    
+    public Hoja() {
     }
-public void Hoja(String nombre){
-    this.nombre=nombre;
-}
-public void SetNombre(String nombre){
-    this.nombre=nombre;
 
-}
- 
-public String GetNombre(){
-    return this.nombre;
+    public String getNombre() {
+        return nombre;
+    }
 
-}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-public DataHoja getData(){
+    public String getPadre() {
+        return padre;
+    }
+
+    public void setPadre(String padre) {
+        this.padre = padre;
+    }
+    
+    public DataHoja getData(){
     DataHoja dh = new DataHoja();
-    dh.DataHoja(nombre);
+    dh.setNombre(nombre);
+    dh.setPadre(padre);
     return dh;
 }
  

@@ -58,22 +58,19 @@ public class ControladorCategoria {
     ListaHoja = gl.getListaHoja();
     List<DataHoja> DataListaHoja = new LinkedList();
     DataHoja dh = new DataHoja();
-        Iterator it = ListaHoja.iterator();
-        while(it.hasNext()){
-            if ( it instanceof Hoja){
-                Hoja h  = new Hoja();
-                h = (Hoja) it;
-                dh = h.getData();
-                DataListaHoja.add(dh);
-            
-            }
-            it.next();
-         }
-        return DataListaHoja;
-            
+    Iterator it = ListaHoja.iterator();
+    while(it.hasNext()){
+        if ( it instanceof Hoja){
+            Hoja h  = new Hoja();
+            h = (Hoja) it;
+            dh = h.getData();
+            DataListaHoja.add(dh);
+        }
+        it.next();
     }
- 
- 
+    return DataListaHoja;
+  }
+  
   public List<DataCompuesta> ListarCompuesta(){
         
     getLista gl = new getLista();
@@ -132,7 +129,7 @@ public Hoja SeleccionarHoja(String nombre){
             if(it instanceof Hoja){
                 
                 h = (Hoja)it;
-                if (h.GetNombre() == nombre){
+                if (h.getNombre() == nombre){
                     return h;
                 }
             

@@ -7,6 +7,7 @@
 package Logica;
 import java.util.*; 
 import Conexionbd.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Guilleeu
@@ -58,13 +59,14 @@ public class ControladorUsuario {
     public List<DataCliente> ListarClientes(){
         
     getLista gl = new getLista();
-    LinkedList<cliente> clientes = gl.getListaCliente();
+    ListaClientes = gl.getListaCliente();
     List<DataCliente> DataListaClientes = new LinkedList();
     DataCliente dc = new DataCliente();
-        for(int i=0; i<clientes.size(); i++){
+        for(int i=0; i < ListaClientes.size(); i++){
                 cliente cc  = new cliente();
-                cc = clientes.get(i);
+                cc = ListaClientes.get(i);
                 dc = cc.getData();
+                //JOptionPane.showMessageDialog(null, dc.getNick());
                 DataListaClientes.add(dc);
         }
     

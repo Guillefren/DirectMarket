@@ -13,16 +13,33 @@ package Logica;
 public class DataHoja {
     
     private String nombre;
-
+    private String padre;
     
-public void DataHoja(){
-    this.nombre=null;
-
-}    
+    public void DataHoja(){
+        this.nombre=null;
+    }
     
-public void DataHoja(String nombre){
-    this.nombre=nombre;
-}
+    public void DataHoja(String nombre){
+        this.nombre=nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getPadre() {
+        return padre;
+    }
+
+    public void setPadre(String padre) {
+        this.padre = padre;
+    }
+    
+    
 
 
 
