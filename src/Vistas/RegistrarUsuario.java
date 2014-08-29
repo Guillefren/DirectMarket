@@ -15,7 +15,10 @@ import java.util.*;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import java.awt.*;
+import java.io.File;
 import java.text.SimpleDateFormat;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JOptionPane;
 /**
@@ -32,7 +35,7 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
             String sitioweb = null;
             String imagen = null;
             Date Fnacimiento = null;
-    
+            String ruta = null;
         /**
      * Creates new form AgregarCliente
      */
@@ -271,7 +274,7 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
                                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -308,7 +311,7 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -409,16 +412,23 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        int regresaValor = jFileChooser1.showOpenDialog(null);    
+         if(regresaValor == JFileChooser.APPROVE_OPTION){
+                        //Accion del fileChooser
+                        File archivoElegido = jFileChooser1.getSelectedFile();
+                                //Obteniendo la direccion del archivo
+                                ruta = archivoElegido.getPath();
+                                //Bloque try-catch para errores}
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    }
     private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
         // TODO add your handling code here:
-        tipo = "C";
+        tipo = "c";
     }//GEN-LAST:event_jRadioButton1MouseClicked
 
     private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
         // TODO add your handling code here:
-        tipo = "P";
+        tipo = "p";
         /*new ActionListener(  ) {
       public void actionPerformed(ActionEvent ae) {
         System.out.println("Urp!");
@@ -456,8 +466,8 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
         nick = jTextField1.getText();
         sitioweb = jTextField7.getText();
         nombrecomp = jTextField6.getText();
-        imagen = jTextField5.getText();
-        Fnacimiento = jDateChooser1.getDate();
+       imagen = /*this.jTextField5.getText();//*/ruta;//this.jFileChooser1.getSelectedFile().getPath();
+        Fnacimiento = jDateChooser2.getDate();
         nom = jTextField3.getText();
         ap = jTextField4.getText();
         email = jTextField2.getText();
@@ -467,11 +477,11 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
     
       if(CampoVacio(nick,nom,ap,email,tipo,nombrecomp,sitioweb,imagen,Fnacimiento) == false){   
          if(cu.existeCliente(nick, email) == false){
-                        if(tipo == "C"){
+                        if(tipo == "c"){
                            
                              cu.RegistrarCliente(nick, nom, ap, email, Fnacimiento, imagen);
                         }
-                       if(tipo == "P"){
+                       if(tipo == "p"){
                             
                             
                         cu.RegistrarProveedor(nick, nom, ap, email, Fnacimiento, imagen, nombrecomp, sitioweb);
@@ -526,7 +536,7 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

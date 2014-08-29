@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 import Logica.Hoja;
 import Logica.Compuesta;
+import java.util.*;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
@@ -53,8 +54,8 @@ public class getLista {
         return ListaCliente;
         }
     
-   public LinkedList<Proveedor> getListaProveedor(){
-        LinkedList<Proveedor> ListaProveedor = new LinkedList();
+   public List<Proveedor> getListaProveedor(){
+        List<Proveedor> ListaProveedor = new LinkedList();
         Conexionbd.conexion bd = new Conexionbd.conexion();
         try{
             bd.conectarBase();
@@ -62,20 +63,21 @@ public class getLista {
             while (rs.next()){
                 Proveedor prov = new Proveedor();
                
-                prov.setNick(rs.getString("Nick"));
-                prov.setApellido(rs.getString("Apellido"));
-                prov.setEmail(rs.getString("Email"));
-                prov.setImagen(rs.getString("Imagen"));
-                prov.setLinkPagina(rs.getString("SitioWeb"));
-                prov.setNombre(rs.getString("Nombre"));
-                prov.setNombreCompañia(rs.getString("NombreCompañia"));
-                
-                java.sql.Date sqldate = rs.getDate("Nacimiento");
+                prov.setNick(rs.getString("NICK"));
+                prov.setApellido(rs.getString("APELLIDO"));
+                System.out.print(prov.getNick());
+                prov.setEmail(rs.getString("EMAIL"));
+                prov.setImagen(rs.getString("IMAGEN"));
+                prov.setLinkPagina(rs.getString("LINK_COMP"));
+                prov.setNombre(rs.getString("NOMBRE"));
+                prov.setNombreCompañia(rs.getString("NOM_COMP"));
+                System.out.print(prov.getNombre());
+                java.sql.Date sqldate = rs.getDate("NACIMIENTO");
                 Date d = new Date(sqldate.getTime());
                 prov.setFnac(d);
-                
+                if(ListaProveedor.isEmpty())
+                    System.out.print("lista vacia");
                 ListaProveedor.add(prov);
-                
                 
             }
         }catch (Exception e){

@@ -27,10 +27,10 @@ public class Prueba extends javax.swing.JFrame {
         DefaultListModel modelo = new DefaultListModel();
         
         getLista gl = new getLista();
-        List<Hoja> hojas= gl.getListaHoja();
+        
         ControladorUsuario cu = new ControladorUsuario();
-        for (int i = 0;i < hojas.size();i++){
-            modelo.addElement(hojas.get(i).getNombre());
+        for (int i = 0;i < gl.getListaHoja().size();i++){
+            modelo.addElement(gl.getListaHoja().get(i).getNombre());
         }
         jList1.setModel(modelo);
     }

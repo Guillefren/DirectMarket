@@ -27,6 +27,22 @@ public void SetNombre(String nombre){
 
 }
 
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public Boolean isContProd() {
+        return ContProd;
+    }
+
+    public void setContProd(Boolean ContProd) {
+        this.ContProd = ContProd;
+    }
+
 
 
     

@@ -91,28 +91,21 @@ public class ControladorUsuario {
         List<DataProveedor> dataListaProveedores = new LinkedList();
         getLista gl = new getLista();
         ListaProveedores = gl.getListaProveedor();
-        if(ListaProveedores.isEmpty()){
-        
-        System.out.print("la lista provedores no tiene objetos");
-        }
         
         
         DataProveedor dp = new DataProveedor();
 
         for(int i = 0;i < ListaProveedores.size();i++){
-            System.out.print("  entro en el dataiterador  ");
+            
                 Proveedor p =ListaProveedores.get(i);
-
                 dp = p.getData();
-                dataListaProveedores.add(dp);
-           
-        
-        }
-      if(dataListaProveedores.isEmpty()){
-      System.out.print("el data lista no tiene nada");
+                dataListaProveedores.add(dp);  
       }
-    return dataListaProveedores;
-    }
+        
+       
+         return dataListaProveedores;
+        }
+      
     
     
      public DataProveedor SeleccionarProveedor(String nick){
