@@ -47,12 +47,12 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
     public boolean CampoVacio(String nick, String nom,String ap,String email,String tipo,String nombrecomp,String sitioweb,String imagen,Date Fnacimiento){
     
         
-        if(tipo == "C"){
+        if(tipo == "c"){
          if(nick.isEmpty() || nom.isEmpty() || ap.isEmpty() || email.isEmpty() || Fnacimiento == null || imagen.isEmpty()){
                             return true;
                                }
         }
-        if(tipo == "P"){
+        if(tipo == "p"){
          if(nick.isEmpty() || nom.isEmpty() || ap.isEmpty() || email.isEmpty() || Fnacimiento == null || imagen.isEmpty() || nombrecomp.isEmpty() || sitioweb.isEmpty()){
                             return true;
                                     }
@@ -404,10 +404,11 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
         // TODO add your handling code here:
         
         // abrir file chosser
-        JFileChooser jf = new JFileChooser();
-        jf.setVisible(true);
-        jf.showOpenDialog(jLabel1);
-        
+//        JFileChooser jf = new JFileChooser();
+//        jf.setVisible(true);
+//        jf.showOpenDialog(jLabel1);
+        this.jFileChooser1.setVisible(true);
+        this.jFileChooser1.showOpenDialog(jLabel1);
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -417,7 +418,7 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
                         //Accion del fileChooser
                         File archivoElegido = jFileChooser1.getSelectedFile();
                                 //Obteniendo la direccion del archivo
-                                ruta = archivoElegido.getPath();
+                                ruta = archivoElegido.getPath(); // agarra la ruta de la imagen
                                 //Bloque try-catch para errores}
     }//GEN-LAST:event_jButton3ActionPerformed
     }
@@ -463,6 +464,8 @@ public class RegistrarUsuario extends javax.swing.JFrame implements ItemListener
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
+        
+        // al darle aceptar para que registre usuario
         nick = jTextField1.getText();
         sitioweb = jTextField7.getText();
         nombrecomp = jTextField6.getText();

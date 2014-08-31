@@ -98,13 +98,25 @@ public class agregar {
      
      }
      public void agregarproducto(producto p) {
-         
+        
              Conexionbd.conexion bd;
              bd = new Conexionbd.conexion();
              bd.conectarBase();
              try {
-             bd.sentencia.executeQuery("INSERT INTO PRODUCTO(Nombre, NumRef,Descripcion, precio,Imagen)VALUES('"+p.getNombre()+"','"+p.getNumRef()+"','"+p.getDescripcion()+"','"+p.getPrecio()+"','"+p.getImagen()+"')");
+             bd.sentencia.executeQuery("INSERT INTO PRODUCTO(NOMBRE, NUM_REF,DESCRIPCION, PRECIO, NOM_PROV, IMAGENES)VALUES('"+p.getNombre()+"','"+p.getNumRef()+"','"+p.getDescripcion()+"','"+p.getPrecio()+"','"+p.getImagen()+"')");
              
+             String signo = "-";
+             String lista;
+             String s;
+             lista = p.getEsp().getListaEspecificaciones().get(0);
+             for(int i = 1; i<p.getEsp().getListaEspecificaciones().size(); i++){
+             
+             s = p.getEsp().getListaEspecificaciones().get(i);
+             lista.concat(signo);
+             lista.concat(s);
+             }
+             
+             bd.sentencia.executeQuery("INSERT INTO ESPECIFICACIONESXPROD (NOMBRE_PROD,ESPECIFICACIONES) VALUES ('"+p.getNombre()+"','"+lista+"') ");
              bd.desconectarBaseDeDatos();
          } catch (SQLException ex) {
              Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);

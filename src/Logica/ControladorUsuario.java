@@ -126,6 +126,26 @@ public class ControladorUsuario {
             
         return null;
         }
+     
+     
+      public Proveedor SeleccionarProv(String nick){
+        
+         getLista gl = new getLista();
+        ListaProveedores = gl.getListaProveedor();
+        
+
+        for(int i = 0;i<ListaProveedores.size();i++){
+            
+                Proveedor p =new Proveedor();
+                p = ListaProveedores.get(i);
+                if (p.getNick().equals(nick)){
+                    
+                    return p;
+                }
+            }
+            
+        return null;
+        }
     
      public boolean existeCliente(String nick, String email){
      
