@@ -9,12 +9,15 @@ import Logica.cliente;
 import Logica.Proveedor;
 import Logica.Compuesta;
 import Logica.Hoja;
+import Logica.OrdenDeCompra;
+import Logica.ProductosOrdenCompra;
 import Logica.producto;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -110,6 +113,21 @@ public class agregar {
              Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
+     
+     public void agregarOrden (OrdenDeCompra oc,List<ProductosOrdenCompra> prods,String n){
+         Conexionbd.conexion bd = new Conexionbd.conexion();
+         java.sql.Date forcom = new java.sql.Date(oc.getFecha().getTime());
+         try {
+             bd.conectarBase();
+             bd.sentencia.executeUpdate("INSERT INTO ORDENCOMPRA VALUES("+oc.getNumero()+",'"+forcom+"','"+oc.getPrecioTotal().getValor()+"','"+n+"')");
+             for (int i = 0;i < prods.size();i++){
+                 bd.sentencia.executeUpdate("INSERT INTO CANTPRODxORDENCOMPRA VALUES('"+prods.get(i).getProducto()+"',"+oc.getNumero()+","+prods.get(i).getCantidad()+")");
+             }
+         } catch (SQLException ex) {
+             Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         
+     }
      
      
 }

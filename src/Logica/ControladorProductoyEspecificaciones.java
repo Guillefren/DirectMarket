@@ -67,21 +67,22 @@ public class ControladorProductoyEspecificaciones {
           public producto SeleccionarProducto(String Nombre){
     
         getLista gl = new getLista();
-       // ListaProductos = gl.getListaProducto();
-        Iterator it = ListaProductos.iterator();
-
-        while (it.hasNext()){
-            if (it instanceof producto){
-                producto pr = new producto();
-                pr = (producto)it;
-                if (pr.getNombre()== Nombre)
-                    return pr;
-
-            }
-            it.next();
-
-        }
-        return null;
+        return gl.SeleccionarProducto(Nombre);
+//       ListaProductos = gl.getListaProducto();
+//        Iterator it = ListaProductos.iterator();
+//
+//        while (it.hasNext()){
+//            if (it instanceof producto){
+//                producto pr = new producto();
+//                pr = (producto)it;
+//                if (pr.getNombre()== Nombre)
+//                    return pr;
+//
+//            }
+//            it.next();
+//
+//        }
+//        return null;
     }
   
      

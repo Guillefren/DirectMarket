@@ -57,21 +57,17 @@ public class ControladorUsuario {
     }
     
     public List<DataCliente> ListarClientes(){
-        
-    getLista gl = new getLista();
-    ListaClientes = gl.getListaCliente();
-    List<DataCliente> DataListaClientes = new LinkedList();
-    DataCliente dc = new DataCliente();
+        getLista gl = new getLista();
+        ListaClientes = gl.getListaCliente();
+        List<DataCliente> DataListaClientes = new LinkedList();
+        DataCliente dc = new DataCliente();
         for(int i=0; i < ListaClientes.size(); i++){
-                cliente cc  = new cliente();
-                cc = ListaClientes.get(i);
-                dc = cc.getData();
-                //JOptionPane.showMessageDialog(null, dc.getNick());
-                DataListaClientes.add(dc);
+            cliente cc  = new cliente();
+            cc = ListaClientes.get(i);
+            dc = cc.getData();
+            DataListaClientes.add(dc);
         }
-    
         return DataListaClientes;
-            // no se si esta devolviendo bien la lista  
     }
     
     public cliente SeleccionarCliente(String nick){

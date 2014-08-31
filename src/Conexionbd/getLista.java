@@ -12,6 +12,10 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 import Logica.Hoja;
 import Logica.Compuesta;
+import Logica.DataHoja;
+import Logica.DataProducto;
+import Logica.Money;
+import Logica.producto;
 import java.util.*;
 import java.sql.SQLException;
 import java.util.Date;
@@ -91,8 +95,8 @@ public class getLista {
     
     
     
-    public LinkedList<Hoja> getListaHoja(){
-        LinkedList<Hoja> ListaHoja = new LinkedList();
+    public List<DataHoja> getListaHoja(){
+        LinkedList<DataHoja> ListaHoja = new LinkedList();
         Conexionbd.conexion bd = new Conexionbd.conexion();
         
             bd.conectarBase();
@@ -100,13 +104,13 @@ public class getLista {
             try {
                 rs = bd.sentencia.executeQuery("SELECT * FROM CATEGORIA WHERE TIPO = 'h'");
                 while (rs.next()){
-                    Hoja hoj = new Hoja();
-                    JOptionPane.showMessageDialog(null, rs.getString("NOMBRE"));
-                    hoj.SetNombre(rs.getString("NOMBRE"));
-                    JOptionPane.showMessageDialog(null, hoj.getNombre());
-                    hoj.setPadre(rs.getString("PADRE"));
-                    
-                    ListaHoja.add(hoj);
+                    DataHoja dh = new DataHoja();
+                    //JOptionPane.showMessageDialog(null, rs.getString("NOMBRE"));
+                    dh.setNombre(rs.getString("NOMBRE"));
+                    //JOptionPane.showMessageDialog(null, hoj.getNombre());
+                    dh.setPadre(rs.getString("PADRE"));
+                    //JOptionPane.showMessageDialog(null, dh.getNombre());
+                    ListaHoja.add(dh);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(getLista.class.getName()).log(Level.SEVERE, null, ex);
@@ -140,4 +144,57 @@ public class getLista {
     
     }
     
+    public List<DataProducto> getProductosxCat(String cat){
+        List<DataProducto> prodsxcat = new LinkedList();
+        Conexionbd.conexion bd = new Conexionbd.conexion();
+        try {
+            bd.conectarBase();
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CATxPROD cp,PRODUCTO p WHERE cp.NOMBRE_PROD = p.NOMBRE AND cp.NOMBRE_CAT ='"+cat+"'");
+            while (rs.next()){
+                DataProducto dp = new DataProducto();
+                dp.setNombre(rs.getString("NOMBRE"));
+                prodsxcat.add(dp);
+            }
+        }catch (SQLException ex) {
+                Logger.getLogger(getLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bd.desconectarBaseDeDatos();
+        return prodsxcat;
+    }
+    
+    public int getMaxNumOrdenCompra(){
+        int num = -1;
+        Conexionbd.conexion bd = new Conexionbd.conexion();
+        try {
+            bd.conectarBase();
+            ResultSet rs = bd.sentencia.executeQuery("SELECT MAX(NUMERO) FROM ORDENCOMPRA");
+            rs.next();
+            num = rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(getLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bd.desconectarBaseDeDatos();
+        return num;
+    }
+    
+    public producto SeleccionarProducto(String p){
+        producto prod = new producto();
+        Conexionbd.conexion bd = new Conexionbd.conexion();
+        try {
+            bd.conectarBase();
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM PRODUCTO WHERE NOMBRE = '"+p+"'");
+            rs.next();
+                prod.setNombre(rs.getString("NOMBRE"));
+                Money prec = new Money();
+                prec.setValor(Double.parseDouble(rs.getString("PRECIO")));
+                prod.setPrecio(prec);
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(getLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bd.desconectarBaseDeDatos();
+        return prod;
+    }
 }

@@ -16,6 +16,7 @@ public class OrdenDeCompra {
     private Date fecha;
     private Money precioTotal;
     
+    
     public void OrdenDeCompra(){
             
     }
@@ -26,6 +27,18 @@ public class OrdenDeCompra {
     
     public void setFecha(Date fec){
         this.fecha = fec;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public Money getPrecioTotal() {
+        return precioTotal;
     }
    
     public void setPrecioTotal(Money pre){

@@ -45,6 +45,25 @@ public class cliente extends Usuario{
    return dc;
    }
     
+    public void CrearOrden(Date fecha,List<ProductosOrdenCompra> prods){
+        double ptotal = 0;
+        ControladorProductoyEspecificaciones cpe = new ControladorProductoyEspecificaciones();
+        for (int i = 0;i < prods.size();i++){
+            producto p = cpe.SeleccionarProducto(prods.get(i).getProducto());
+            double pparcial = p.getPrecio().getValor()*prods.get(i).getCantidad();
+            ptotal = ptotal+pparcial;
+        }
+        Money pt = new Money();
+        pt.setValor(ptotal);
+        getLista gl = new getLista();
+        agregar a = new agregar();
+        OrdenDeCompra oc = new OrdenDeCompra();
+        oc.setFecha(fecha);
+        oc.setNumero(gl.getMaxNumOrdenCompra()+1);
+        oc.setPrecioTotal(pt);
+        a.agregarOrden(oc, prods, nick);
+    }
+    
 
    
    

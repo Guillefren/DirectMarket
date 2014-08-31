@@ -7,13 +7,14 @@
 package Logica;
 import java.util.*;
 import Conexionbd.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Herobrine
  */
 public class ControladorCategoria {
-    private List ListaCompuesta;
-    private List ListaHoja;
+    private List<Compuesta> ListaCompuesta;
+    private List<Hoja> ListaHoja;
     
    
     
@@ -22,8 +23,8 @@ public class ControladorCategoria {
     
  public void ControladorCategoria(){
         
-    List<Compuesta> ListaCompuesta = new LinkedList();
-    List<Hoja> ListaHoja = new LinkedList();
+    ListaCompuesta = new LinkedList();
+    ListaHoja = new LinkedList();
     
     }
 
@@ -53,23 +54,24 @@ public class ControladorCategoria {
  }
  
   public List<DataHoja> ListarHoja(){
-        
-    getLista gl = new getLista();
-    ListaHoja = gl.getListaHoja();
-    List<DataHoja> DataListaHoja = new LinkedList();
-    DataHoja dh = new DataHoja();
-    Iterator it = ListaHoja.iterator();
-    while(it.hasNext()){
-        if ( it instanceof Hoja){
-            Hoja h  = new Hoja();
-            h = (Hoja) it;
-            dh = h.getData();
-            DataListaHoja.add(dh);
+        getLista gl = new getLista();
+        return gl.getListaHoja();
+        /*List<DataHoja> DataListaHojas = new LinkedList();
+        DataHoja dh = new DataHoja();
+        for(int i=0; i < ListaHoja.size(); i++){
+            System.out.print(ListaHoja.get(i).getNombre());
+            Hoja hh  = new Hoja();
+            hh = ListaHoja.get(i);
+            dh.setNombre(hh.getNombre());
+            dh.setPadre(hh.getPadre());
+            JOptionPane.showMessageDialog(null, dh.getNombre());
+            DataListaHojas.add(dh);
         }
-        it.next();
+        return DataListaHojas;*/
     }
-    return DataListaHoja;
-  }
+        
+    
+  
   
   public List<DataCompuesta> ListarCompuesta(){
         
@@ -117,7 +119,7 @@ public Compuesta SeleccionarCompuesta(String nombre){
     }
   
 
-public Hoja SeleccionarHoja(String nombre){
+/*public Hoja SeleccionarHoja(String nombre){
         
         getLista gl = new getLista();
         ListaHoja = gl.getListaHoja();
@@ -137,7 +139,12 @@ public Hoja SeleccionarHoja(String nombre){
        }
     
     return null;
-    }
+    }*/
+
+public List<DataProducto> getProductosxCat(String cat){
+    getLista gl = new getLista();
+    return gl.getProductosxCat(cat);
+}
 
 
 
