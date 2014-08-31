@@ -11,7 +11,7 @@ package Logica;
  * @author Agustin
  */
 public class Money {
-    private int valor;
+    private double valor;
     private String tipo;
     
     public void Money(){
@@ -19,11 +19,11 @@ public class Money {
       tipo = null;
     }
 
-    public int getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(int valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
