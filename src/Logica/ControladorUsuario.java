@@ -114,7 +114,7 @@ public class ControladorUsuario {
             
                 Proveedor p =new Proveedor();
                 p = ListaProveedores.get(i);
-                if (p.getNick()== nick){
+                if (p.getNick().equals(nick)){
                     DataProveedor dp = p.getData();
                     return dp;
                 }

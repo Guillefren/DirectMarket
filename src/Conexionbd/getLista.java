@@ -75,12 +75,11 @@ public class getLista {
                 prov.setLinkPagina(rs.getString("LINK_COMP"));
                 prov.setNombre(rs.getString("NOMBRE"));
                 prov.setNombreCompañia(rs.getString("NOM_COMP"));
-                System.out.print(prov.getNombre());
+                
                 java.sql.Date sqldate = rs.getDate("NACIMIENTO");
                 Date d = new Date(sqldate.getTime());
                 prov.setFnac(d);
-                if(ListaProveedor.isEmpty())
-                    System.out.print("lista vacia");
+                
                 ListaProveedor.add(prov);
                 
             }

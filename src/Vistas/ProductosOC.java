@@ -34,7 +34,7 @@ public class ProductosOC extends javax.swing.JFrame {
         Nick.setText(nick);
         Email.setText(email);
         int mes = d.getMonth()+1;
-        int anio = d.getYear()+1900;;
+        int anio = d.getYear()+1900;
         Fecha.setText(d.getDate()+"/"+mes+"/"+anio);
         Hora.setText(d.getHours()+":"+d.getMinutes());
         DefaultTableModel modelo = new DefaultTableModel();

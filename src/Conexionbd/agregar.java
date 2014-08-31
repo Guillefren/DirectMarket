@@ -37,7 +37,7 @@ public class agregar {
             String tipo = "c";  
               
               //cal.getTime().getYear()+"-"+cal.getTime().getMonth()+"-"+cal.getTime().getDay()
-             bd.sentencia.executeQuery("INSERT INTO USUARIOS(nick,nombre,apellido,email,nacimiento,imagen,tipo)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+fecha+"','"+cli.getImagen()+"','"+tipo+"')");
+             bd.sentencia.executeQuery("INSERT INTO USUARIOS(NICK,NOMBRE,APELLIDO,EMAIL,NACIMIENTO,IMAGEN,TIPO)VALUES('"+cli.getNick()+"','"+cli.getNombre()+"','"+cli.getApellido()+"','"+cli.getEmail()+"','"+fecha+"','"+cli.getImagen()+"','"+tipo+"')");
          
          
          } catch (SQLException ex) {

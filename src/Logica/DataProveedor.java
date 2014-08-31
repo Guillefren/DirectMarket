@@ -110,6 +110,7 @@ public class DataProveedor {
        this.linkPagina = linkPagina;
        this.nombre = nombre;
        this.nombreCompañia = nombreCompañia;
+       this.imagen = imagen;
    }
    
  

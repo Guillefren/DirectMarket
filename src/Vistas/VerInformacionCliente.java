@@ -244,9 +244,11 @@ public class VerInformacionCliente extends javax.swing.JFrame {
         jTextFieldApellido.setText(dccli.getApellido());
         jTextFieldEmail.setText(dccli.getEmail());
         this.jTextField4.setText(dccli.getFnac().toString());
-        String img =dccli.getImagen();
-        ImageIcon image = new ImageIcon(img);
-        jLabel9.setIcon(image);
+        if(dccli.getFnac() == null){
+            String img =dccli.getImagen();
+            ImageIcon image = new ImageIcon(img);
+            jLabel9.setIcon(image);
+        }
     }
     
     

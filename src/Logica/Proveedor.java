@@ -16,8 +16,8 @@ public class Proveedor extends Usuario{
     private String nombreCompañia;
     private String linkPagina;
     
-    public void Proveedor(){
-    
+    public Proveedor(){
+   
     nombreCompañia= "-";
     linkPagina = "-";
     
@@ -42,14 +42,7 @@ public class Proveedor extends Usuario{
     this.linkPagina = lp;
     }
     
-    public Proveedor(){
-       nick = null;
-       nombre = null;
-       apellido = null;
-       fnac = null;
-      nombreCompañia = null;
-      linkPagina = null;
-   }
+    
    
    public Proveedor(String ni,String nom, String ap, Date fnac,String nc, String lp){
         
