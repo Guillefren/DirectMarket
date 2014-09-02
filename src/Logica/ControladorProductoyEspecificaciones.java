@@ -66,8 +66,8 @@ public class ControladorProductoyEspecificaciones {
     }
           public producto SeleccionarProducto(String Nombre){
     
-        getLista gl = new getLista();
-        return gl.SeleccionarProducto(Nombre);
+
+      //  return gl.SeleccionarProducto(Nombre);
 //       ListaProductos = gl.getListaProducto();
 //        Iterator it = ListaProductos.iterator();
 //
@@ -81,8 +81,22 @@ public class ControladorProductoyEspecificaciones {
 //            }
 //            it.next();
 //
-//        }
-//        return null;
+
+       // ListaProductos = gl.getListaProducto();
+        Iterator it = ListaProductos.iterator();
+
+        while (it.hasNext()){
+            if (it instanceof producto){
+                producto pr = new producto();
+                pr = (producto)it;
+                if (pr.getNombre()== Nombre)
+                    return pr;
+
+            }
+            it.next();
+
+        }
+        return null;
     }
   
      

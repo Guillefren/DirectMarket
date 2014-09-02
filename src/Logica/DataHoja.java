@@ -13,6 +13,7 @@ package Logica;
 public class DataHoja {
     
     private String nombre;
+ 
     private String padre;
     
     public void DataHoja(){
@@ -40,7 +41,6 @@ public class DataHoja {
     }
     
     
+                   
 
-
-
-}
+ 

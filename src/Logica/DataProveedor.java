@@ -111,6 +111,7 @@ public class DataProveedor {
        this.nombre = nombre;
        this.nombreCompañia = nombreCompañia;
        this.imagen = imagen;
+
    }
    
  

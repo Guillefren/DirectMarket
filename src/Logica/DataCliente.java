@@ -6,6 +6,7 @@
 
 package Logica;
 
+
 import java.util.Date;
 
 /**
@@ -57,8 +58,6 @@ public class DataCliente {
     this.imagen = imagen;
     this.nick = nick;
     fnac = fnaci;
-    this.nombre = nombre;
     
     }
- 
 }

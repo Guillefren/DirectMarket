@@ -16,6 +16,7 @@ public class Proveedor extends Usuario{
     private String nombreCompañia;
     private String linkPagina;
     
+
     public Proveedor(){
    
     nombreCompañia= "-";
@@ -72,6 +73,7 @@ public class Proveedor extends Usuario{
    
        DataProveedor dp = new DataProveedor();
        dp.setDatos(nick, nombre, apellido, email, fnac, linkPagina, nombreCompañia, imagen);
+
        return dp;
    }
    

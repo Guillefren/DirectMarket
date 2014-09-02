@@ -27,6 +27,7 @@ public void SetNombre(String nombre){
 
 }
 
+
     public String getNombre() {
         return Nombre;
     }
@@ -42,7 +43,6 @@ public void SetNombre(String nombre){
     public void setContProd(Boolean ContProd) {
         this.ContProd = ContProd;
     }
-
 
 
     

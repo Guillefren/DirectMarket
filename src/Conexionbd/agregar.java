@@ -9,6 +9,7 @@ import Logica.cliente;
 import Logica.Proveedor;
 import Logica.Compuesta;
 import Logica.Hoja;
+
 import Logica.OrdenDeCompra;
 import Logica.ProductosOrdenCompra;
 import Logica.producto;
@@ -140,6 +141,4 @@ public class agregar {
          }
          
      }
-     
-     
 }

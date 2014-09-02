@@ -16,6 +16,7 @@ public class OrdenDeCompra {
     private Date fecha;
     private Money precioTotal;
     
+
     
     public void OrdenDeCompra(){
             
@@ -48,6 +49,7 @@ public class OrdenDeCompra {
         DataOrdenDeCompra odc = new DataOrdenDeCompra();
         odc.setDatos(numero, fecha, precioTotal);
         return odc;
+
    }
    
     

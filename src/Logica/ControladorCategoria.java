@@ -7,6 +7,7 @@
 package Logica;
 import java.util.*;
 import Conexionbd.*;
+
 import javax.swing.JOptionPane;
 /**
  *
@@ -53,7 +54,7 @@ public class ControladorCategoria {
  
  }
  
-  public List<DataHoja> ListarHoja(){
+  public List<Hoja> ListarHoja(){
         getLista gl = new getLista();
         return gl.getListaHoja();
         /*List<DataHoja> DataListaHojas = new LinkedList();
@@ -146,9 +147,36 @@ public List<DataProducto> getProductosxCat(String cat){
     return gl.getProductosxCat(cat);
 }
 
+    
+    
+    
+ 
 
+    
+ 
+ 
+  
+  
 
-
-
-
+public Hoja SeleccionarHoja(String nombre){
+        
+        getLista gl = new getLista();
+        ListaHoja = gl.getListaHoja();
+        
+       Iterator it = ListaHoja.iterator();
+       
+       for(int i=0; i<=ListaHoja.size();i++){
+           Hoja h = new Hoja();
+            if(it instanceof Hoja){
+                
+                h = (Hoja)it;
+                if (h.getNombre() == nombre){
+                    return h;
+                }
+            
+            }
+       }
+    
+    return null;
+    }
 }

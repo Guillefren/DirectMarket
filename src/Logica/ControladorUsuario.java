@@ -7,6 +7,7 @@
 package Logica;
 import java.util.*; 
 import Conexionbd.*;
+
 import javax.swing.JOptionPane;
 /**
  *
@@ -157,15 +158,5 @@ public class ControladorUsuario {
      }
      return false;
      }
-    
-  /*  public List<OrdenDeCompra> ObtenerOrdenesdeCompra(){
-    
-    
-    }
-    public dataOrdenDeCompra SeleccionarOrdenCompra(OrdenDeCompra oc){
-    
-    
-    
-    }
-    */
+     
 }

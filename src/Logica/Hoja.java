@@ -12,6 +12,7 @@ package Logica;
  */
 public class Hoja extends Categoria {
     
+
     private String nombre;
     private String padre;
     
@@ -32,6 +33,7 @@ public class Hoja extends Categoria {
     DataHoja dh = new DataHoja();
     dh.setNombre(nombre);
     dh.setPadre(padre);
+
     return dh;
 }
  
