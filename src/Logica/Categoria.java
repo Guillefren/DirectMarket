@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Logica;
 
@@ -12,50 +7,43 @@ package Logica;
  */
 abstract class Categoria {
     private String Nombre;
-    private Boolean ContProd;
+    private Compuesta Padre;
+    private char tipo;
+    
     
 
-
-public void Categoria(){
-    this.Nombre = null;
+    public void Categoria(){
+        this.Nombre = null;
+        this.tipo = ' ';
+        this.Padre = null;
     
-
-
-}
-public void SetNombre(String nombre){
-    this.Nombre=nombre;
-
-}
-
-
-    public String getNombre() {
-        return Nombre;
     }
-
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
-    }
-
-    public Boolean isContProd() {
-        return ContProd;
-    }
-
-    public void setContProd(Boolean ContProd) {
-        this.ContProd = ContProd;
-    }
-
-
     
+    public void SetNombre(String nombre){
+        this.Nombre = nombre;
+    }
+    
+    public void SetTipo (char tipo){
+        this.tipo = tipo;
+    }
+    
+    public String GetNombre(){
+        
+        return this.Nombre;
+        
+        }
 
+    public char GetTipo(){
+        return this.tipo;
+    }
 
+    public void SetPadre(String nombre){
+        ControladorCategoria cont = new ControladorCategoria();
+        this.Padre = cont.SeleccionarCompuesta(nombre);
+    }
+    
+    public Compuesta GetPadre(){
+        return this.Padre;
+    }
+    
 }
-
-
-
-
-
-
-
-
-
-

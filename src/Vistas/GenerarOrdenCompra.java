@@ -14,6 +14,7 @@ import Logica.DataProducto;
 import Logica.OrdenDeCompra;
 import Logica.ProductosOrdenCompra;
 import Logica.cliente;
+import Logica.producto;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -262,10 +263,19 @@ public class GenerarOrdenCompra extends javax.swing.JFrame {
         int fila = Categorias.getSelectedRow();
         String cat = Categorias.getValueAt(fila,0).toString();
         ControladorCategoria ca = new ControladorCategoria();
-        List<DataProducto> prods = ca.getProductosxCat(cat);
+        
+        List<DataProducto> listdp = new LinkedList();
+        List<producto> prods = ca.getProdxCat(cat);
+        for ( int n = 0;n<prods.size();n++){
+            DataProducto dp = new DataProducto();
+            dp = prods.get(n).getDataProd();
+            listdp.add(dp);
+        
+        }
+        
         DefaultTableModel modelo3 = new DefaultTableModel();
         modelo3.setColumnIdentifiers(new String[]{"Productos"});
-        for (int i = 0;i < prods.size();i++){
+        for (int i = 0;i < listdp.size();i++){
             modelo3.addRow(new Object[]{prods.get(i).getNombre()});
         }
         Productos.setModel(modelo3);

@@ -106,9 +106,9 @@ public class getLista {
                 while (rs.next()){
                     Hoja dh = new Hoja();
                     //JOptionPane.showMessageDialog(null, rs.getString("NOMBRE"));
-                    dh.setNombre(rs.getString("NOMBRE"));
+                    dh.SetNombre(rs.getString("NOMBRE"));
                     //JOptionPane.showMessageDialog(null, hoj.getNombre());
-                    dh.setPadre(rs.getString("PADRE"));
+                    dh.SetPadre(rs.getString("PADRE"));
                     //JOptionPane.showMessageDialog(null, dh.getNombre());
                     ListaHoja.add(dh);
                 }
@@ -128,32 +128,33 @@ public class getLista {
         LinkedList<Compuesta> ListaCompuesta = new LinkedList();
         Conexionbd.conexion bd = new Conexionbd.conexion();
         try{
-            bd.conectarBase();
-            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CATEGORIAS");
-            while (rs.next()){
-                Compuesta com = new Compuesta();
-                ListaCompuesta.add(com);
-                
-            }
+                bd.conectarBase();
+                ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CATEGORIA WHERE TIPO='c'");
+        while (rs.next()){
+                Compuesta comp = new Compuesta();
+                //int cont = rs.getRow();
+                comp.SetNombre(rs.getString("NOMBRE"));
+                //comp.SetPadre(rs.getString("PADRE"));
+                ListaCompuesta.add(comp);
+        }
         }catch (Exception e){
-            
+                System.out.println("No anda guacho");
         }
         bd.desconectarBaseDeDatos();
-        
         return ListaCompuesta;
-    
+
     }
     
-    public List<DataProducto> getProductosxCat(String cat){
-        List<DataProducto> prodsxcat = new LinkedList();
+    public List<producto> getProductosxCat(String cat){
+        List<producto> prodsxcat = new LinkedList();
         Conexionbd.conexion bd = new Conexionbd.conexion();
         try {
             bd.conectarBase();
             ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CATxPROD cp,PRODUCTO p WHERE cp.NOMBRE_PROD = p.NOMBRE AND cp.NOMBRE_CAT ='"+cat+"'");
             while (rs.next()){
-                DataProducto dp = new DataProducto();
-                dp.setNombre(rs.getString("NOMBRE"));
-                prodsxcat.add(dp);
+                producto p = new producto();
+                p.setNombre(rs.getString("NOMBRE"));
+                prodsxcat.add(p);
             }
         }catch (SQLException ex) {
                 Logger.getLogger(getLista.class.getName()).log(Level.SEVERE, null, ex);

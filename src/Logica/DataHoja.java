@@ -13,11 +13,15 @@ package Logica;
 public class DataHoja {
     
     private String nombre;
- 
     private String padre;
+    private char tipo;
     
     public void DataHoja(){
         this.nombre=null;
+    }
+
+    public void setTipo(char tipo) {
+        this.tipo = tipo;
     }
     
     public void DataHoja(String nombre){
@@ -40,7 +44,8 @@ public class DataHoja {
         this.padre = padre;
     }
     
-}
-                   
+    
 
- 
+
+
+}

@@ -69,38 +69,34 @@ public class agregar {
      }
      
      public void agregarCompuesta(Compuesta comp){
-     Conexionbd.conexion bd;
-     bd = new Conexionbd.conexion();
-     bd.conectarBase();
-         try {
-             
-             bd.sentencia.executeQuery("INSERT INTO CATEGORIA(REF, NOMBRE, PADRE)VALUES('"+1+"','"+comp.getNombre()+"','"+comp.getPadre()+"')");
-         } catch (SQLException ex) {
-             
-             Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
-         }
-     
-         bd.desconectarBaseDeDatos();
-     
-     
-     }
+        Conexionbd.conexion bd;
+        bd = new Conexionbd.conexion();
+        bd.conectarBase();
+try {
+        bd.sentencia.executeQuery("INSERT INTO CATEGORIA(Tipo, Nombre, Padre)VALUES('"+comp.GetTipo()+"','"+comp.GetNombre()+"','"+comp.GetPadre().GetNombre()+"')");
+} 
+        catch (SQLException ex) {
+        System.out.println("No se pudo agregar a Base de datos");
+        Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+bd.desconectarBaseDeDatos();
+
+}
      
      public void agregarHoja(Hoja hoj){
-     Conexionbd.conexion bd;
-     bd = new Conexionbd.conexion();
-     bd.conectarBase();
-         try {
-             
-             bd.sentencia.executeQuery("INSERT INTO HOJA(REF, NOMBRE, PADRE)VALUES('"+1+"','"+hoj.getNombre()+"','"+0+"')");
-         } catch (SQLException ex) {
-             
-             Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
-         }
-     
-         bd.desconectarBaseDeDatos();
-     
-     
-     }
+        Conexionbd.conexion bd;
+        bd = new Conexionbd.conexion();
+        bd.conectarBase();
+    try {
+        bd.sentencia.executeQuery("INSERT INTO CATEGORIA(Tipo, Nombre, Padre)VALUES('"+hoj.GetTipo()+"','"+hoj.GetNombre()+"','"+hoj.GetPadre().GetNombre()+"')");
+    } 
+    catch (SQLException ex) {
+            System.out.println("No se pudo agregar a Base de datos");
+            Logger.getLogger(agregar.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    bd.desconectarBaseDeDatos();
+
+}
      public void agregarproducto(producto p) {
         
              Conexionbd.conexion bd;

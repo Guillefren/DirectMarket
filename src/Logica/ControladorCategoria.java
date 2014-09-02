@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Logica;
 import java.util.*;
 import Conexionbd.*;
-
 import javax.swing.JOptionPane;
 /**
  *
@@ -19,171 +13,122 @@ public class ControladorCategoria {
     
    
     
-    
-    
-    
- public void ControladorCategoria(){
+    public void ControladorCategoria(){
+        List<Compuesta> ListaCompuesta = new LinkedList();
+        List<Hoja> ListaHoja = new LinkedList();
         
-    ListaCompuesta = new LinkedList();
-    ListaHoja = new LinkedList();
-    
     }
-
     
- 
- public void AltaCategoria(String nombre, Boolean contieneProducto, String padre){
- 
-     if (contieneProducto){
-         Hoja h = new Hoja();
-         h.SetNombre(nombre);
-         ListaHoja.add(h);
-         agregar ag = new agregar();
-         ag.agregarHoja(h);
+    public void AltaCategoria(String nombre, Boolean contieneProducto, String padre){
+        if(contieneProducto){
+            Hoja h = new Hoja();
+            h.SetNombre(nombre);
+            h.SetTipo('h');
+            h.SetPadre(padre);
             
-     }
-     else{
-         Compuesta c = new Compuesta();
-         c.SetNombre(nombre);
-         if(padre!=null){
-             c.SetPadre(padre);
-             agregar ag = new agregar();
-             ag.agregarCompuesta(c);
-             
-         }
-     }
- 
- }
- 
-  public List<Hoja> ListarHoja(){
-        getLista gl = new getLista();
-        return gl.getListaHoja();
-        /*List<DataHoja> DataListaHojas = new LinkedList();
-        DataHoja dh = new DataHoja();
-        for(int i=0; i < ListaHoja.size(); i++){
-            System.out.print(ListaHoja.get(i).getNombre());
-            Hoja hh  = new Hoja();
-            hh = ListaHoja.get(i);
-            dh.setNombre(hh.getNombre());
-            dh.setPadre(hh.getPadre());
-            JOptionPane.showMessageDialog(null, dh.getNombre());
-            DataListaHojas.add(dh);
+            agregar ag = new agregar();
+            ag.agregarHoja(h);
         }
-        return DataListaHojas;*/
-    }
-        public List<DataHoja> ListarHojas(){
-            
-             getLista gl = new getLista();
-             ListaHoja = gl.getListaHoja();
-             List<DataHoja> DataListaHojas = new LinkedList();
-        DataHoja dh = new DataHoja();
-        for(int i=0; i < ListaHoja.size(); i++){
-            System.out.print(ListaHoja.get(i).getNombre());
-            Hoja hh  = new Hoja();
-            hh = ListaHoja.get(i);
-            dh.setNombre(hh.getNombre());
-            dh.setPadre(hh.getPadre());
-            JOptionPane.showMessageDialog(null, dh.getNombre());
-            DataListaHojas.add(dh);
-        }
-        return DataListaHojas;
-        }
-  
-  
-  public List<DataCompuesta> ListarCompuesta(){
         
-    getLista gl = new getLista();
-    ListaCompuesta = gl.getListaCompuesta();
-    List<DataCompuesta> DataListaCompuesta = new LinkedList();
-    DataCompuesta dc = new DataCompuesta();
-        Iterator it = ListaCompuesta.iterator();
-        while(it.hasNext()){
-            if ( it instanceof Compuesta){
-                Compuesta c  = new Compuesta();
-                c = (Compuesta) it;
-                dc = c.getData();
-                DataListaCompuesta.add(dc);
-            
+        
+        else{
+            Compuesta c = new Compuesta();
+            c.SetNombre(nombre);
+            c.SetTipo('c');
+            if(padre!=null){
+                c.SetPadre(padre);
+                
             }
-            it.next();
-         }
-        return DataListaCompuesta;
+            else{
+                c.SetPadre("Raiz");
+                
+            }
+            agregar ag = new agregar();
+                //System.out.println(c.GetPadre().GetNombre());
             
+            
+            
+            ag.agregarCompuesta(c);
+            
+        }
+    
     }
-  
-
-public Compuesta SeleccionarCompuesta(String nombre){
-        
+    
+    public List<producto> getProdxCat(String cat){
+    getLista g1 = new getLista();
+    return g1.getProductosxCat(cat);
+    }
+    
+    public Compuesta SeleccionarCompuesta (String nombre){
         getLista gl = new getLista();
         ListaCompuesta = gl.getListaCompuesta();
         
-       Iterator it = ListaCompuesta.iterator();
-       
-       for(int i=0; i<=ListaCompuesta.size();i++){
-           Compuesta c = new Compuesta();
-            if(it instanceof Compuesta){
-                
-                c = (Compuesta)it;
-                if (c.getNombre()== nombre){
-                    return c;
-                }
-            it.next();
-            
-            }
-       }
+        for (int i=0; i<ListaCompuesta.size(); i++){
+                if (ListaCompuesta.get(i).GetNombre().equals(nombre)){
+                    return ListaCompuesta.get(i);
+                 }
+              }
+        return null;
     
-    return null;
     }
-  
+    
+    
+    public List<DataCompuesta> ListarCompuestas(){
+      
+        getLista gl = new getLista();
+        ListaCompuesta = gl.getListaCompuesta();
+        List<DataCompuesta> dataListaCompuesta = new LinkedList();
+        DataCompuesta dc = new DataCompuesta();
+        Iterator it = ListaCompuesta.iterator();
+        for(int i = 0;i < ListaCompuesta.size();i++){
+            
+                Compuesta c =ListaCompuesta.get(i);
 
-/*public Hoja SeleccionarHoja(String nombre){
+                dc = c.GetData();
+                dataListaCompuesta.add(dc);
+           
         
+        }
+        return dataListaCompuesta;        
+        
+    }
+    public List<DataHoja> ListarHojas(){
+      
         getLista gl = new getLista();
         ListaHoja = gl.getListaHoja();
-        
-       Iterator it = ListaHoja.iterator();
-       
-       for(int i=0; i<=ListaHoja.size();i++){
-           Hoja h = new Hoja();
-            if(it instanceof Hoja){
-                
-                h = (Hoja)it;
-                if (h.getNombre() == nombre){
-                    return h;
-                }
+        List<DataHoja> dataListaHoja = new LinkedList();
+        DataHoja dc = new DataHoja();
+        Iterator it = ListaHoja.iterator();
+        for(int i = 0;i < ListaHoja.size();i++){
             
-            }
-       }
-    
-    return null;
-    }*/
+                Hoja c =ListaHoja.get(i);
 
-public List<DataProducto> getProductosxCat(String cat){
-    getLista gl = new getLista();
-    return gl.getProductosxCat(cat);
+                dc = c.GetData();
+                dataListaHoja.add(dc);
+           
+        
+        }
+        return dataListaHoja;        
+        
+    }
+    /*
+      public List<DataCompuesta> ListarCompuestas(){
+        getLista gl = new getLista();
+        LinkedList<Compuesta> Compuesta = gl.getListaCliente2();
+        List<DataCliente> DataListaClientes = new LinkedList();
+        DataCliente dc = new DataCliente();
+        for(int i=0; i<clientes.size(); i++){
+            cliente cc = new cliente();
+            cc = clientes.get(i);
+            dc = cc.getData();
+            DataListaClientes.add(dc);
+        }
+        return DataListaClientes;
+// no se si esta devolviendo bien la lista 
 }
-
     
-
-
-public Hoja SeleccionarHoja(String nombre){
-        
-        getLista gl = new getLista();
-        ListaHoja = gl.getListaHoja();
-        
-       Iterator it = ListaHoja.iterator();
-       
-       for(int i=0; i<=ListaHoja.size();i++){
-           Hoja h = new Hoja();
-            if(it instanceof Hoja){
-                
-                h = (Hoja)it;
-                if (h.getNombre() == nombre){
-                    return h;
-                }
-            
-            }
-       }
     
-    return null;
-    }
+    
+    */
+    
 }

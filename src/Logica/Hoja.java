@@ -1,45 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Logica;
-
+import java.util.*;
 /**
  *
  * @author Herobrine
  */
 public class Hoja extends Categoria {
     
-
-    private String nombre;
-    private String padre;
+    private List<producto> Listaproductos;
     
-    public Hoja() {
+    
+    public Hoja(){
+    
+    Listaproductos = new LinkedList();
     }
 
- 
-
-    public String getPadre() {
-        return padre;
+    public List<producto> getListaproductos() {
+        return Listaproductos;
     }
 
-    public void setPadre(String padre) {
-        this.padre = padre;
+    public void setListaproductos(List<producto> Listaproductos) {
+        this.Listaproductos = Listaproductos;
+    }
+    public DataHoja GetData(){
+        DataHoja dc = new DataHoja();
+        dc.setNombre(this.GetNombre());
+        dc.setTipo('h');
+        
+        return dc;
     }
     
-    public DataHoja getData(){
-    DataHoja dh = new DataHoja();
-    dh.setNombre(nombre);
-    dh.setPadre(padre);
-
-    return dh;
-}
- 
- 
- 
-
- 
+    
+    
+    
     
 }
