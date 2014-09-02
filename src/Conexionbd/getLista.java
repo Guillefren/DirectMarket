@@ -95,8 +95,8 @@ public class getLista {
     
     
     
-    public List<DataHoja> getListaHoja(){
-        LinkedList<DataHoja> ListaHoja = new LinkedList();
+    public List<Hoja> getListaHoja(){
+        LinkedList<Hoja> ListaHoja = new LinkedList();
         Conexionbd.conexion bd = new Conexionbd.conexion();
         
             bd.conectarBase();
@@ -104,7 +104,7 @@ public class getLista {
             try {
                 rs = bd.sentencia.executeQuery("SELECT * FROM CATEGORIA WHERE TIPO = 'h'");
                 while (rs.next()){
-                    DataHoja dh = new DataHoja();
+                    Hoja dh = new Hoja();
                     //JOptionPane.showMessageDialog(null, rs.getString("NOMBRE"));
                     dh.setNombre(rs.getString("NOMBRE"));
                     //JOptionPane.showMessageDialog(null, hoj.getNombre());

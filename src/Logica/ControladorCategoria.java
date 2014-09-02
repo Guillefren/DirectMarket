@@ -70,8 +70,23 @@ public class ControladorCategoria {
         }
         return DataListaHojas;*/
     }
-        
-    
+        public List<DataHoja> ListarHojas(){
+            
+             getLista gl = new getLista();
+             ListaHoja = gl.getListaHoja();
+             List<DataHoja> DataListaHojas = new LinkedList();
+        DataHoja dh = new DataHoja();
+        for(int i=0; i < ListaHoja.size(); i++){
+            System.out.print(ListaHoja.get(i).getNombre());
+            Hoja hh  = new Hoja();
+            hh = ListaHoja.get(i);
+            dh.setNombre(hh.getNombre());
+            dh.setPadre(hh.getPadre());
+            JOptionPane.showMessageDialog(null, dh.getNombre());
+            DataListaHojas.add(dh);
+        }
+        return DataListaHojas;
+        }
   
   
   public List<DataCompuesta> ListarCompuesta(){
@@ -148,15 +163,7 @@ public List<DataProducto> getProductosxCat(String cat){
 }
 
     
-    
-    
- 
 
-    
- 
- 
-  
-  
 
 public Hoja SeleccionarHoja(String nombre){
         

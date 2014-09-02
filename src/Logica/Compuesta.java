@@ -53,7 +53,7 @@ public String getNombre(){
 
 public DataCompuesta getData(){
     DataCompuesta dc = new DataCompuesta();
-    dc.DataCompuesta(nombre);
+    dc.SetNombre(nombre);
     return dc;
 }
  

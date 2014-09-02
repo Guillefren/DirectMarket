@@ -50,7 +50,8 @@ public class GenerarOrdenCompra extends javax.swing.JFrame {
         DefaultTableModel modelo2 = new DefaultTableModel();
         modelo2.setColumnIdentifiers(new String[]{"Categoría"});
         ControladorCategoria ca = new ControladorCategoria();
-        List<DataHoja> hojas = ca.ListarHoja();
+        
+        List<DataHoja> hojas = ca.ListarHojas();
         for (int i = 0;i < hojas.size();i++){
             modelo2.addRow(new Object[]{hojas.get(i).getNombre()});
         }
