@@ -9,8 +9,13 @@ package Vistas;
 import java.util.*;
 
 import Logica.*; 
+import static Vistas.VerInfoProducto.modelo;
+import java.io.File;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,28 +26,47 @@ public class RegistrarProducto extends javax.swing.JFrame {
     /**
      * Creates new form RegistrarProducto
      */
-    
+    static DefaultListModel m = new DefaultListModel();
     private String Nombre= "-";
     private int NumRef=0;
-    private String Desc="-";
+    private String Desc = "-";
     private String Esp="-";
     private Money prec;
     private String Categoria= "-";
-    private String Imag="-";
+    private List<String> Imag = new LinkedList();
     public List<String> listEsp = new LinkedList();
     public ControladorUsuario cu = new ControladorUsuario();
     public DataProveedor datap = new DataProveedor();
+    static List<Hoja> cats = new LinkedList();
     
     public RegistrarProducto() {
         initComponents();
-        DefaultListModel m = new DefaultListModel();
-        for (int i=0; i < cu.ListarProveedores().size(); i++){
-            datap = cu.ListarProveedores().get(i);
-            m.addElement(datap.getNick());
+         
+        ControladorUsuario cu = new ControladorUsuario();
+        List<DataProveedor> ListaProveedores = new LinkedList();
+        
+        ListaProveedores = cu.ListarProveedores();
+        
+        for(int i = 0; i < ListaProveedores.size();i++){
             
+            DataProveedor dp = new DataProveedor();
+            dp = ListaProveedores.get(i);
+          
+            m.addElement(dp.getNick());
             
         }
-      jList1.setModel(m);
+        jList1.setModel(m);
+        jList1.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jList1.setVisible(true);
+        
+        DefaultTableModel modelo2 = new DefaultTableModel();
+        modelo2.setColumnIdentifiers(new String[]{"Categoría"});
+        ControladorCategoria ca = new ControladorCategoria();
+        List<DataHoja> hojas = ca.ListarHojas();
+        for (int i = 0;i < hojas.size();i++){
+            modelo2.addRow(new Object[]{hojas.get(i).getNombre()});
+        }
+        Categorias.setModel(modelo2);
            }
 
     /**
@@ -54,6 +78,7 @@ public class RegistrarProducto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -66,16 +91,17 @@ public class RegistrarProducto extends javax.swing.JFrame {
         numRef = new javax.swing.JTextField();
         descripcion = new javax.swing.JTextField();
         precio = new javax.swing.JTextField();
-        fileImagen = new javax.swing.JTextField();
         confirmar = new javax.swing.JButton();
         especificacion = new javax.swing.JTextField();
-        botonEspecific = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Categorias = new javax.swing.JTree();
-        categoria = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        AgregarEspecif = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
+        AgregarImagen = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Categorias = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,16 +146,6 @@ public class RegistrarProducto extends javax.swing.JFrame {
             }
         });
 
-        fileImagen.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                fileImagenAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-
         confirmar.setText("Confirmar");
         confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,205 +159,183 @@ public class RegistrarProducto extends javax.swing.JFrame {
             }
         });
 
-        botonEspecific.setText("Agregar Especificacion");
-        botonEspecific.addMouseListener(new java.awt.event.MouseAdapter() {
+        AgregarEspecif.setText("Agregar Especificacion");
+        AgregarEspecif.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botonEspecificMouseClicked(evt);
+                AgregarEspecifMouseClicked(evt);
             }
         });
-        botonEspecific.addActionListener(new java.awt.event.ActionListener() {
+        AgregarEspecif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonEspecificActionPerformed(evt);
+                AgregarEspecifActionPerformed(evt);
             }
         });
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Celulares");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("SistemOperativo");
-        javax.swing.tree.DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("IOS");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Android");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("WindowsPhone");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Symbian");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BlackBerryOS");
-        treeNode3.add(treeNode4);
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Equipos");
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("iPhone");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Nexus");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Samsung");
-        javax.swing.tree.DefaultMutableTreeNode treeNode5 = new javax.swing.tree.DefaultMutableTreeNode("GalaxyS3");
-        treeNode4.add(treeNode5);
-        treeNode5 = new javax.swing.tree.DefaultMutableTreeNode("GalaxyS4");
-        treeNode4.add(treeNode5);
-        treeNode5 = new javax.swing.tree.DefaultMutableTreeNode("GalaxyACE");
-        treeNode4.add(treeNode5);
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BlackBerry");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Nokia");
-        treeNode3.add(treeNode4);
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Accesorios");
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Protectores");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Baterias");
-        treeNode3.add(treeNode4);
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Apple");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("VideoJuegos");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("PlayStations");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("XBox");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        Categorias.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        Categorias.addMouseListener(new java.awt.event.MouseAdapter() {
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CategoriasMouseClicked(evt);
+                jList1MouseClicked(evt);
             }
         });
+        jScrollPane1.setViewportView(jList1);
+
+        AgregarImagen.setText("Agregar Imagen");
+        AgregarImagen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AgregarImagenMouseClicked(evt);
+            }
+        });
+        AgregarImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarImagenActionPerformed(evt);
+            }
+        });
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        Categorias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
         jScrollPane2.setViewportView(Categorias);
 
-        categoria.setText("categoria");
-        categoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoriaActionPerformed(evt);
+        jButton1.setText("Agregar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
             }
         });
 
-        jLabel8.setText("Escriba categoría");
-
-        jScrollPane1.setViewportView(jList1);
+        jLabel8.setText("Categoria");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel3)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(especificacion)
+                    .addComponent(AgregarEspecif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nombre)
+                    .addComponent(numRef)
+                    .addComponent(descripcion)
+                    .addComponent(precio)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                    .addComponent(jTextField1))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonEspecific)
-                            .addComponent(especificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(numRef, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(fileImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(89, 89, 89))
-                            .addComponent(categoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(21, 21, 21))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(63, 63, 63))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(AgregarImagen)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(confirmar)
-                .addGap(202, 202, 202))
+                .addGap(246, 246, 246))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(numRef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(especificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addComponent(botonEspecific)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
+                .addComponent(jLabel1)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
                             .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fileImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(numRef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(especificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(AgregarEspecif)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AgregarImagen)
+                .addGap(18, 18, 18)
                 .addComponent(confirmar)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
-        String Nombre = nombre.getText();
+         
     }//GEN-LAST:event_nombreActionPerformed
 
     private void numRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numRefActionPerformed
-        int NumRef = Integer.parseInt(numRef.getText());
+         
     }//GEN-LAST:event_numRefActionPerformed
 
     private void descripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcionActionPerformed
-        String Desc = descripcion.getText();
+       
     }//GEN-LAST:event_descripcionActionPerformed
 
     private void especificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_especificacionActionPerformed
         
     }//GEN-LAST:event_especificacionActionPerformed
 
-    private void botonEspecificActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEspecificActionPerformed
-        
-    }//GEN-LAST:event_botonEspecificActionPerformed
+    private void AgregarEspecifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarEspecifActionPerformed
+      //ACA NADA
+    }//GEN-LAST:event_AgregarEspecifActionPerformed
 
     private void precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioActionPerformed
        
@@ -349,34 +343,90 @@ public class RegistrarProducto extends javax.swing.JFrame {
 
     private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
         //chequea todos los datos y guarda todo
-        Money prec = new Money();
+        String np = (String)this.jList1.getSelectedValue();
+      
+        prec = new Money();
+        Desc = this.descripcion.getText();
+        NumRef = Integer.parseInt(numRef.getText());
+        Nombre = nombre.getText();
         prec.setTipo("USD");
-        prec.setValor(Integer.parseInt(precio.getText()));
-       ControladorProductoyEspecificaciones cpe = new ControladorProductoyEspecificaciones();
-        cpe.RegistrarProducto(Nombre, NumRef, Desc, listEsp, prec, Imag);
         
+        prec.setValor(Integer.parseInt(precio.getText()));
+        ControladorProductoyEspecificaciones cpe = new ControladorProductoyEspecificaciones();
+        System.out.print(Nombre);
+        System.out.print(NumRef);
+        System.out.print(prec.getValor());
+        System.out.print(Imag);
+        System.out.print(Desc);
+        System.out.print(np);
+        
+        
+        cpe.RegistrarProducto(Nombre, NumRef, Desc, listEsp, prec, np, Imag, cats);
+        
+//        if(listEsp.isEmpty())
+//            System.out.print("vaciioo");
+       
+        /*CARGAR IMAGEN
+        int regresaValor = jFileChooser1.showOpenDialog(null); 
+if(regresaValor == JFileChooser.APPROVE_OPTION){
+//Accion del fileChooser
+File archivoElegido = jFileChooser1.getSelectedFile();
+//Obteniendo la direccion del archivo
+ruta = archivoElegido.getPath(); // agarra la ruta de la imagen
+//Bloque try-catch para errores}*/
+        this.dispose();
     }//GEN-LAST:event_confirmarActionPerformed
 
-    private void fileImagenAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_fileImagenAncestorAdded
-        String Imag = fileImagen.getText();
-    }//GEN-LAST:event_fileImagenAncestorAdded
-
-    private void categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaActionPerformed
-        String Categoria = categoria.getText();
-    }//GEN-LAST:event_categoriaActionPerformed
-
-    private void botonEspecificMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEspecificMouseClicked
-        String Esp = especificacion.getText();
+    private void AgregarEspecifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarEspecifMouseClicked
+         
+        //debe agregar especificacion con RegistrarEspecificacion 
+        Esp = especificacion.getText();
         // guarda anterior, limpia pantalla, agrega nuevo
         //el string de arriba lo agrega en la lista de string vacia que hay que crear en initcomponets
         listEsp.add(Esp);
+        /*for (int i = 0;i < listEsp.size();i++){
+            JOptionPane.showMessageDialog(null, listEsp.get(i));
+        }*/
+        
         especificacion.setText(null);
-    }//GEN-LAST:event_botonEspecificMouseClicked
+    }//GEN-LAST:event_AgregarEspecifMouseClicked
 
-    private void CategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CategoriasMouseClicked
+    private void AgregarImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarImagenMouseClicked
         // TODO add your handling code here:
-       // this.Categorias.gets
-    }//GEN-LAST:event_CategoriasMouseClicked
+        this.jFileChooser1.setVisible(true);
+        //this.jFileChooser1.showOpenDialog(null);
+        int regresaValor = jFileChooser1.showOpenDialog(null);
+        if(regresaValor == JFileChooser.APPROVE_OPTION){
+            File archivoElegido = jFileChooser1.getSelectedFile();
+            String ruta = archivoElegido.getPath();
+            JOptionPane.showMessageDialog(null, ruta);
+            Imag.add(ruta);
+        }
+      
+    }//GEN-LAST:event_AgregarImagenMouseClicked
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jList1MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        ControladorCategoria ca = new ControladorCategoria();
+        int fila = Categorias.getSelectedRow();
+        String nomcat = Categorias.getValueAt(fila, 0).toString();
+        Hoja hoj = ca.SeleccionarHoja(nomcat);
+        //JOptionPane.showMessageDialog(null, hoj.GetNombre());
+        cats.add(hoj);
+        
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void AgregarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarImagenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AgregarImagenActionPerformed
 
     
         
@@ -419,13 +469,14 @@ public class RegistrarProducto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTree Categorias;
-    private javax.swing.JButton botonEspecific;
-    private javax.swing.JTextField categoria;
+    private javax.swing.JButton AgregarEspecif;
+    private javax.swing.JButton AgregarImagen;
+    private javax.swing.JTable Categorias;
     private javax.swing.JButton confirmar;
     private javax.swing.JTextField descripcion;
     private javax.swing.JTextField especificacion;
-    private javax.swing.JTextField fileImagen;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -438,6 +489,7 @@ public class RegistrarProducto extends javax.swing.JFrame {
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField numRef;
     private javax.swing.JTextField precio;

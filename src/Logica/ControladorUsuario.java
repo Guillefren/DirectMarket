@@ -29,6 +29,11 @@ public class ControladorUsuario {
     // sintaxis List<Persona> listalinked = new LinkedList<Persona>();
     }
   
+    
+    public List<OrdenDeCompra> getNumeroOrden(String nic){
+            getLista gl = new getLista();
+            return gl.getListaNumeroOrden();
+            }
    
     public void RegistrarCliente(String nick, String nombre, String apellido, String email, Date fnac, String Imagen){
     
@@ -143,6 +148,21 @@ public class ControladorUsuario {
             
         return null;
         }
+      
+      public List<DataOrdenDeCompra> getListaOrdenCompra(){
+        getLista gl = new getLista();
+        List<DataOrdenDeCompra> ldorden = new LinkedList();
+        List<OrdenDeCompra> lisorden = gl.getListaNumeroOrden();
+        for(int i=0; i<lisorden.size();i++){
+                DataOrdenDeCompra dorden = new DataOrdenDeCompra();
+                dorden.setPrecioTotal(lisorden.get(i).getPrecioTotal());
+                dorden.setFecha(lisorden.get(i).getFecha());
+                dorden.setProd(lisorden.get(i).getLproducto());
+                dorden.setNumero(lisorden.get(i).getNumero());
+                ldorden.add(dorden);
+            }
+return ldorden;
+}
     
      public boolean existeCliente(String nick, String email){
      

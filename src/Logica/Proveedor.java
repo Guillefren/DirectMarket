@@ -16,6 +16,14 @@ public class Proveedor extends Usuario{
     private String nombreCompañia;
     private String linkPagina;
     private List<producto> listaproductos;
+
+    public List<producto> getListaproductos() {
+        return listaproductos;
+    }
+
+    public void setListaproductos(List<producto> listaproductos) {
+        this.listaproductos = listaproductos;
+    }
     
 
     public Proveedor(){

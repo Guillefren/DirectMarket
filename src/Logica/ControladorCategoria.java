@@ -14,10 +14,49 @@ public class ControladorCategoria {
    
     
     public void ControladorCategoria(){
-        List<Compuesta> ListaCompuesta = new LinkedList();
-        List<Hoja> ListaHoja = new LinkedList();
+        ListaCompuesta = new LinkedList();
+        ListaHoja = new LinkedList();
         
     }
+    
+    public List<DataHoja> ListarHojaConProd(){
+        
+    getLista gl = new getLista();
+    ListaHoja = gl.getListaHojaConProd();
+    List<DataHoja> DataListaHoja = new LinkedList();
+    DataHoja dh = new DataHoja();
+    for(int i=0; i<ListaHoja.size();i++){
+         dh = ListaHoja.get(i).GetData();
+         //dh=h.getData();
+         DataListaHoja.add(dh);
+     }
+        return DataListaHoja;
+            
+    }
+    
+    
+    public Hoja SeleccionarHoja(String nombre){
+        
+        getLista gl = new getLista();
+        ListaHoja = gl.getListaHoja();
+        
+       //Iterator it = ListaHoja.iterator();
+       
+       for(int i=0; i<=ListaHoja.size();i++){
+           Hoja h = new Hoja();
+            //if(it instanceof Hoja){
+                
+                h = ListaHoja.get(i);
+                if (nombre.equals(h.GetNombre())){
+                    return h;
+                }
+            
+            }
+       
+    
+    return null;
+    }
+    
     
     public void AltaCategoria(String nombre, Boolean contieneProducto, String padre){
         if(contieneProducto){

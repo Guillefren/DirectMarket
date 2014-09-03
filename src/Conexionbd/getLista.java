@@ -83,9 +83,62 @@ public class getLista {
         return ListaCliente;
         }
     
+        public List<OrdenDeCompra> getListaNumeroOrden(){
+            List<OrdenDeCompra> lnumero = new LinkedList();
+            Conexionbd.conexion bd = new Conexionbd.conexion();
+                ControladorUsuario cont = new ControladorUsuario();
+    try{
+    bd.conectarBase();
+    ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM ORDENCOMPRA");
+
+    while (rs.next()){
+        
+        OrdenDeCompra orden = new OrdenDeCompra();
+        java.sql.Date sqldate = rs.getDate("FECHA");
+        Date d = new Date(sqldate.getTime());
+        orden.setFecha(d);
+        orden.setNumero(rs.getInt("NUMERO"));
+        System.out.print(orden.getNumero());
+        Money pre = new Money();
+        pre.setValor(Double.valueOf(rs.getString("PREC_TOTAL")));
+        pre.setTipo("USD");
+        orden.setPrecioTotal(pre);
+        orden.setCliente(cont.SeleccionarCliente(rs.getString("NOMBRE_CLI")));
+        ResultSet rs2 = bd.sentencia.executeQuery("SELECT * FROM PRODUCTO,CANTPRODXORDENCOMPRA WHERE NOMBRE = NOMBRE_PROD AND NUM_OC ="+orden.getNumero()+"");
+        List<producto> lprod = new LinkedList();
+        
+        while(rs2.next()){
+            System.out.print("dentro");
+            producto pro = new producto();
+            pro.setNombre(rs2.getString("NOMBRE"));
+            pro.setDescripcion(rs2.getString("DESCRIPCION"));
+            pro.setNumRef(rs2.getInt("NUM_REF"));
+/* Money preuni = new Money();
+preuni.setValor(Double.valueOf(rs2.getString("PRECIO")));
+preuni.setTipo("USD");
+pro.setPrecio(preuni);*/
+            pro.setEsp(null);
+            // pro.setImagen(rs2.getString("IMAGEN"));
+            lprod.add(pro);
+} 
+        orden.setLproducto(lprod);
+        lnumero.add(orden); 
+        System.out.print(lnumero.size());
+}
+}catch (Exception e){}
+    bd.desconectarBaseDeDatos();
+return lnumero;
+}
+        
+        
+        
+        
+        
+        
    public List<Proveedor> getListaProveedor(){
         List<Proveedor> ListaProveedor = new LinkedList();
         Conexionbd.conexion bd = new Conexionbd.conexion();
+        List<producto> lp = new LinkedList();
         try{
             bd.conectarBase();
             ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM USUARIOS WHERE TIPO = 'p'");
@@ -93,6 +146,7 @@ public class getLista {
                 Proveedor prov = new Proveedor();
                
                 prov.setNick(rs.getString("NICK"));
+                
                 prov.setApellido(rs.getString("APELLIDO"));
                 System.out.print(prov.getNick());
                 prov.setEmail(rs.getString("EMAIL"));
@@ -105,15 +159,51 @@ public class getLista {
                 Date d = new Date(sqldate.getTime());
                 prov.setFnac(d);
                 
-                
-            ResultSet rs2 = bd.sentencia.executeQuery("SELECT * FROM PRODUCTOS WHERE NOMBRE_PROV = '"+prov.getNombre()+"'");    
+            
+            ResultSet rs2 = bd.sentencia.executeQuery("SELECT * FROM PRODUCTO WHERE NOMBRE_PROV = '"+prov.getNick()+"'");    
                 
                 while(rs2.next()){
                 
+                producto prod = new producto();
+                prod.setNombre(rs2.getString("NOMBRE"));
+                prod.setDescripcion(rs2.getString("DESCRIPCION"));
+                prod.setNumRef(rs2.getInt("NUM_REF"));
+                
+                
+                
+                String imag = rs2.getString("IMAGENES");
+                //JOptionPane.showMessageDialog(null, imag);
+                List<String> imagenes = new LinkedList();
+                StringTokenizer st2 = new StringTokenizer(imag,"-");
+                while(st2.hasMoreTokens()){
+                    imagenes.add(st2.nextToken());
+                    //JOptionPane.showMessageDialog(null, st2.nextToken());
+                }
+                 prod.setImagen(imagenes);
+                
+                
+                double i = Double.parseDouble(rs2.getString("PRECIO"));
+                Money prec = new Money();
+                prec.setValor(i);
+                prod.setPrecio(prec);
+                prod.setProvee(prov);
+                
+                         
+                ResultSet rs3 = bd.sentencia.executeQuery("SELECT * FROM CATxPROD WHERE NOMBRE_PROD = '"+prod.getNombre()+"'");
+                List<Hoja> hojas = new LinkedList();
+                while(rs3.next()){
+                    String categ = rs3.getString("NOMBRE_CAT");
+                    Hoja hoja = new Hoja();
+                    hoja.SetNombre(categ);
+                    hojas.add(hoja);
+                    //JOptionPane.showMessageDialog(null, hoja.GetNombre());
+                    prod.setHoja(hojas);
+                }
+               lp.add(prod);
                 
                 
                 }
-            
+                prov.setListaproductos(lp);
             
                 
                 ListaProveedor.add(prov);
@@ -127,7 +217,33 @@ public class getLista {
         return ListaProveedor;
     
     }
+   
+    public LinkedList<Hoja> getListaHojaConProd(){
+        LinkedList<Hoja> ListaHoja = new LinkedList();
+        Conexionbd.conexion bd = new Conexionbd.conexion();
+        try{
+                
+                bd.conectarBase();
+                ResultSet rs = bd.sentencia.executeQuery("SELECT DISTINCT NOMBRE_CAT FROM CATxPROD");
+                while (rs.next()){
+                Hoja com = new Hoja();
+                
+                com.SetNombre(rs.getString("NOMBRE_CAT"));
+                
+                
+                
+                ListaHoja.add(com);
+                
+            }
+                
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e);
+            }
+        bd.desconectarBaseDeDatos();
+        
+        return ListaHoja;
     
+    }
     
     
     public List<Hoja> getListaHoja(){
@@ -145,8 +261,45 @@ public class getLista {
                     //JOptionPane.showMessageDialog(null, hoj.getNombre());
                     dh.SetPadre(rs.getString("PADRE"));
                     //JOptionPane.showMessageDialog(null, dh.getNombre());
-                    ListaHoja.add(dh);
+                    
+                    
+                 ResultSet rs2 = bd.sentencia.executeQuery("SELECT * FROM PRODUCTO,CATXPROD WHERE NOMBRE = NOMBRE_PROD AND NOMBRE_CAT = '"+dh.GetNombre()+"'");    
+               List<producto> lp = new LinkedList();
+                  while (rs2.next()){
+                  
+                producto prod = new producto();
+                prod.setNombre(rs2.getString("NOMBRE"));
+                prod.setDescripcion(rs2.getString("DESCRIPCION"));
+                prod.setNumRef(rs2.getInt("NUM_REF"));
+                
+               
+                String imag = rs2.getString("IMAGENES");
+                //JOptionPane.showMessageDialog(null, imag);
+                List<String> imagenes = new LinkedList();
+                StringTokenizer st2 = new StringTokenizer(imag,"-");
+                while(st2.hasMoreTokens()){
+                    imagenes.add(st2.nextToken());
+                    //JOptionPane.showMessageDialog(null, st2.nextToken());
                 }
+                 prod.setImagen(imagenes);
+                
+                
+                double i = Double.parseDouble(rs2.getString("PRECIO"));
+                Money prec = new Money();
+                prec.setValor(i);
+                prod.setPrecio(prec);
+                
+                ControladorUsuario cu = new ControladorUsuario();
+                prod.setProvee(cu.SeleccionarProv(rs2.getString("NOMBRE_PROV")));
+                prod.addHoja(dh);
+                    lp.add(prod);
+                }
+               dh.setListaproductos(lp);
+                  
+                ListaHoja.add(dh);  
+                  }  
+                    
+                
             } catch (SQLException ex) {
                 Logger.getLogger(getLista.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -157,6 +310,7 @@ public class getLista {
         return ListaHoja;
     
     }
+    
     
     
     public LinkedList<Compuesta> getListaCompuesta(){
@@ -235,9 +389,9 @@ public class getLista {
     }
     
     
-    public List<producto> getListaProductoSolo(){
+   public List<producto> getListaProductoSolo(){
         List<producto> ListaProductoSolo = new LinkedList();
-        Especificacion esp = new Especificacion();
+        
         Conexionbd.conexion bd = new Conexionbd.conexion();
         
             try{
@@ -290,4 +444,54 @@ public class getLista {
         
         return ListaProductoSolo;
     }
+    
+    public List<producto> getListaProducto(String cat){
+            List<producto> ListaProducto = new LinkedList();
+            Conexionbd.conexion bd = new Conexionbd.conexion();
+        try{
+            bd.conectarBase();
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM CATXPROD WHERE NOMBRE_CAT='"+cat+"'");
+    
+                while (rs.next()){
+                    producto prod = new producto();
+                    prod.setNombre(rs.getString("NOMBRE_PROD"));
+
+                    ListaProducto.add(prod);
+                }
+        }catch (SQLException e){
+}
+    bd.desconectarBaseDeDatos();
+            return ListaProducto;
+}
+    
+   public Especificacion getEspecificacionesProd(producto prod){
+        Especificacion esp = new Especificacion();
+        Conexionbd.conexion bd = new Conexionbd.conexion();
+        bd.conectarBase();
+        try {
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM ESPECIFICACIONESxPROD WHERE NOMBRE_PROD = '"+prod.getNombre()+"'");
+            while(rs.next()){
+                esp.setProd(prod);
+                String esps = rs.getString("ESPECIFICACIONES");
+                //JOptionPane.showMessageDialog(null, esps);
+                List<String> especificaciones = new LinkedList();
+                StringTokenizer st = new StringTokenizer(esps,"-");
+                while(st.hasMoreTokens()){
+                    especificaciones.add(st.nextToken());
+                    //JOptionPane.showMessageDialog(null, st.nextToken());
+                }
+                esp.setLista(especificaciones);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(getLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bd.desconectarBaseDeDatos();
+        /*for (int i = 0;i < esp.getListaEspecificaciones().size();i++){
+            JOptionPane.showMessageDialog(null, esp.getListaEspecificaciones().get(i));
+        }*/
+        return esp;
+    }
+    
+    
 }

@@ -8,6 +8,7 @@ package Logica;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
   
 /**
@@ -16,7 +17,14 @@ import java.util.ArrayList;
  */
 public class Especificacion {
     private List<String> listEsp;
+    private producto prod;
     
+    public Especificacion(){
+    
+    listEsp = new LinkedList();
+    prod = null;
+    
+    }
     public void Especificacion(List<String> lesp){
         this.listEsp = lesp;
         
@@ -25,6 +33,22 @@ public class Especificacion {
     public List<String> getListaEspecificaciones(){
         return this.listEsp;
        
+    }
+
+    public List<String> getListEsp() {
+        return listEsp;
+    }
+
+    public void setListEsp(List<String> listEsp) {
+        this.listEsp = listEsp;
+    }
+
+    public producto getProd() {
+        return prod;
+    }
+
+    public void setProd(producto prod) {
+        this.prod = prod;
     }
     
     public void agregarEspecificacion(String esp){

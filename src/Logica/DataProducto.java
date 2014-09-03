@@ -1,6 +1,6 @@
-
-
 package Logica;
+
+import java.util.List;
 
 /**
  *
@@ -13,7 +13,8 @@ public class DataProducto {
     private String Descripcion;
     private Especificacion Esp;
     private Money Precio;
-    private String Imagen;
+    private List<String> Imagen;
+    private Proveedor proveedor;
     
     public void DataProducto(){
         Nombre=null;
@@ -21,15 +22,25 @@ public class DataProducto {
         Esp=null;
         Precio=null;
         Imagen=null;
+        proveedor = null;
     }
 
-    void setDataProd(String Nombre, int NumRef, String Descripcion, Especificacion Especif, Money Precio, String Imagen) {
+    void setDataProd(String Nombre, int NumRef, String Descripcion, Especificacion Especif, Money Precio, Proveedor proveedor, List<String> Imagen) {
         this.Nombre=Nombre;
         this.NumRef=NumRef;
         this.Descripcion=Descripcion;
         this.Esp=Especif;
         this.Precio=Precio;
         this.Imagen=Imagen;
+        this.proveedor= proveedor;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
     public String getNombre() {
@@ -72,18 +83,12 @@ public class DataProducto {
         this.Precio = Precio;
     }
 
-    public String getImagen() {
+    public List<String> getImagen() {
         return Imagen;
     }
 
-    public void setImagen(String Imagen) {
+    public void setImagen(List<String> Imagen) {
         this.Imagen = Imagen;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
     }
     
 }

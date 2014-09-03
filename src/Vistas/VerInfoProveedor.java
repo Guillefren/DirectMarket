@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
  */
 public class VerInfoProveedor extends javax.swing.JFrame {
 
-    static DefaultTableModel modeloTabla = new DefaultTableModel();
+    static DefaultTableModel modeloTabla;
     
     int fila = 0;
     
@@ -93,7 +93,6 @@ public class VerInfoProveedor extends javax.swing.JFrame {
                 "Email", "Nick"
             }
         ));
-        jTable1.setColumnSelectionAllowed(true);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -101,7 +100,6 @@ public class VerInfoProveedor extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         jLabel1.setText("Nombre");
 

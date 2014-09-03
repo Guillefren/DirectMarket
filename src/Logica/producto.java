@@ -29,6 +29,11 @@ public class producto {
         return hojas;
     }
 
+    public void addHoja(Hoja h){
+    
+    hojas.add(h);
+    
+    }
     public void setHoja(List<Hoja> hojas) {
         this.hojas = hojas;
     }

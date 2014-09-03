@@ -11,23 +11,45 @@ import java.util.*;
  *
  * @author Agustin
  */
-class DataOrdenDeCompra {
+public class DataOrdenDeCompra {
+private int numero;
+private Date fecha;
+private Money precioTotal;
+private List<producto> prod;
+public List<producto> getProd() {
+return prod;
+}
+public void setProd(List<producto> prod) {
+this.prod = prod;
+}
 
-    private int numero;
-    private Date fecha;
-    private Money precioTotal;
-    
-    public void DataOrdenDeCompra(){
-         numero = 0;
-         fecha = null;
-         precioTotal = null;
+public Date getFecha() {
+return fecha;
+}
+public void setFecha(Date fecha) {
+this.fecha = fecha;
+}
+public Money getPrecioTotal() {
+return precioTotal;
+}
+public void setPrecioTotal(Money precioTotal) {
+this.precioTotal = precioTotal;
+}
 
-    }
-    public void setDatos(int num, Date fec, Money pre){
-    
-    this.numero = num;
-    this.fecha = fec;
-    this.precioTotal = pre;
-
-    }
+public void DataOrdenDeCompra(){
+numero = 0;
+fecha = null;
+precioTotal = null;
+}
+public int getNumero(){
+return numero;
+};
+public void setNumero(int num){
+this.numero = num;
+}
+public void setDatos(int num, Date fec, Money pre){
+this.numero = num;
+this.fecha = fec;
+this.precioTotal = pre;
+}
 }
