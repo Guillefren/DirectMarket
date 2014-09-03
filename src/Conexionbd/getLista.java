@@ -12,10 +12,13 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 import Logica.Hoja;
 import Logica.Compuesta;
+import Logica.ControladorUsuario;
 
 import Logica.DataHoja;
 import Logica.DataProducto;
+import Logica.Especificacion;
 import Logica.Money;
+import Logica.OrdenDeCompra;
 import Logica.producto;
 import java.util.*;
 import java.sql.SQLException;
@@ -49,6 +52,27 @@ public class getLista {
                 Date d = new Date(sqldate.getTime());
                 cli.setFnac(d);
                 //System.out.print(cli.getData().getNombre());
+                
+             ResultSet rs1 = bd.sentencia.executeQuery("SELECT * FROM ORDENCOMPRA WHERE NOMBRE_CLI = '"+cli.getNombre()+"'");   
+   //("SELECT * FROM CATxPROD cp,PRODUCTO p WHERE cp.NOMBRE_PROD = p.NOMBRE AND cp.NOMBRE_CAT ='"+cat+"'")
+              while (rs1.next()){
+              
+                  OrdenDeCompra oc = new OrdenDeCompra();
+                    java.sql.Date sqldate2 = rs1.getDate("FECHA");
+                    Date d2 = new Date(sqldate2.getTime());
+                    oc.setFecha(d2);
+                
+                  oc.setNumero(rs1.getInt("NUMERO"));
+                  Money pr = new Money();
+                  pr.setValor(Double.valueOf(rs1.getString("PREC_TOTAL")));
+                  pr.setTipo("USD");
+                  oc.setPrecioTotal(pr);
+                  cli.addOrden(oc);
+                  
+              }
+             
+             
+             
                 ListaCliente.add(cli);
                  }
         }catch (SQLException e){
@@ -80,6 +104,17 @@ public class getLista {
                 java.sql.Date sqldate = rs.getDate("NACIMIENTO");
                 Date d = new Date(sqldate.getTime());
                 prov.setFnac(d);
+                
+                
+            ResultSet rs2 = bd.sentencia.executeQuery("SELECT * FROM PRODUCTOS WHERE NOMBRE_PROV = '"+prov.getNombre()+"'");    
+                
+                while(rs2.next()){
+                
+                
+                
+                }
+            
+            
                 
                 ListaProveedor.add(prov);
                 
@@ -197,5 +232,62 @@ public class getLista {
         }
         bd.desconectarBaseDeDatos();
         return prod;
+    }
+    
+    
+    public List<producto> getListaProductoSolo(){
+        List<producto> ListaProductoSolo = new LinkedList();
+        Especificacion esp = new Especificacion();
+        Conexionbd.conexion bd = new Conexionbd.conexion();
+        
+            try{
+            bd.conectarBase();
+            ResultSet rs = bd.sentencia.executeQuery("SELECT * FROM PRODUCTO p,ESPECIFICACIONESxPROD e WHERE p.NOMBRE = e.NOMBRE_PROD");
+            while (rs.next()){
+                producto prod = new producto();
+                prod.setNombre(rs.getString("NOMBRE"));
+                prod.setDescripcion(rs.getString("DESCRIPCION"));
+                prod.setNumRef(rs.getInt("NUM_REF"));
+          //      prod.setImagen(rs.getString("IMAGENES"));
+                
+                
+                String imag = rs.getString("IMAGENES");
+                //JOptionPane.showMessageDialog(null, imag);
+                List<String> imagenes = new LinkedList();
+                StringTokenizer st2 = new StringTokenizer(imag,"-");
+                while(st2.hasMoreTokens()){
+                    imagenes.add(st2.nextToken());
+                    //JOptionPane.showMessageDialog(null, st.nextToken());
+                }
+                 prod.setImagen(imagenes);
+                
+                
+                double i = Double.parseDouble(rs.getString("PRECIO"));
+                Money prec = new Money();
+                prec.setValor(i);
+                prod.setPrecio(prec);
+                ControladorUsuario cu = new ControladorUsuario();
+                Proveedor pr = new Proveedor();
+                pr = cu.SeleccionarProv(rs.getString("NOMBRE_PROV"));
+                prod.setProvee(pr);
+                         
+                ResultSet rs2 = bd.sentencia.executeQuery("SELECT * FROM CATxPROD WHERE NOMBRE_PROD = '"+prod.getNombre()+"'");
+                List<Hoja> hojas = new LinkedList();
+                while(rs2.next()){
+                    String categ = rs2.getString("NOMBRE_CAT");
+                    Hoja hoja = new Hoja();
+                    hoja.SetNombre(categ);
+                    hojas.add(hoja);
+                    //JOptionPane.showMessageDialog(null, hoja.GetNombre());
+                    prod.setHoja(hojas);
+                }
+               
+                ListaProductoSolo.add(prod);
+            }
+        }catch (SQLException e){
+        }
+        bd.desconectarBaseDeDatos();
+        
+        return ListaProductoSolo;
     }
 }

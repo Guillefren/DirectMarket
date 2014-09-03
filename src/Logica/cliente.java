@@ -13,8 +13,10 @@ import java.util.*;
  * @author Agustin
  */
 public class cliente extends Usuario{
-         
+        private List<OrdenDeCompra> listaordenes;
+        
    public cliente(){
+       listaordenes = new LinkedList();
     }
    
    public void setDatos(String nick, String nombre, String apellido, String email, Date fnac, String Imagen){
@@ -30,8 +32,8 @@ public class cliente extends Usuario{
        this.nick = ni;
        this.nombre = nom;
        this.apellido = ap;
+       listaordenes = new LinkedList();
    }
-
    public void agregarCli(cliente cli){
        
        agregar ag = new agregar();
@@ -64,7 +66,11 @@ public class cliente extends Usuario{
         a.agregarOrden(oc, prods, nick);
     }
     
+public void addOrden(OrdenDeCompra o){
 
+    this.listaordenes.add(o);
+
+}
    
    
    

@@ -15,11 +15,13 @@ public class OrdenDeCompra {
     private int numero;
     private Date fecha;
     private Money precioTotal;
+    private List<producto> lproducto;
     
-
-    
-    public void OrdenDeCompra(){
-            
+    public  OrdenDeCompra(){
+           numero = 0;
+           fecha = new Date();
+           precioTotal = new Money();
+           lproducto = new LinkedList();
     }
     
     public void setNumero(int num){

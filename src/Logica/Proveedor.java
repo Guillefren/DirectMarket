@@ -15,12 +15,14 @@ public class Proveedor extends Usuario{
     
     private String nombreCompañia;
     private String linkPagina;
+    private List<producto> listaproductos;
     
 
     public Proveedor(){
    
     nombreCompañia= "-";
     linkPagina = "-";
+    listaproductos = new LinkedList();
     
     }
     public String getNombreCompañia(){

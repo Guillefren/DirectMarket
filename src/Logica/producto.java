@@ -7,8 +7,9 @@
 package Logica;
 
 import Conexionbd.agregar;
-import Logica.DataProducto;
-import Logica.Especificacion;
+import Logica.*; 
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -20,35 +21,58 @@ public class producto {
     private String Descripcion;
     private Especificacion Esp;
     private Money Prec;
-    private String Imagen;
+    private List<String> Imagen;
+    private Proveedor provee;
+    private List<Hoja> hojas;
+
+    public List<Hoja> getHoja() {
+        return hojas;
+    }
+
+    public void setHoja(List<Hoja> hojas) {
+        this.hojas = hojas;
+    }
+
+    public Money getPrec() {
+        return Prec;
+    }
+
+    public void setPrec(Money Prec) {
+        this.Prec = Prec;
+    }
+
+    public Proveedor getProvee() {
+        return provee;
+    }
+
+    public void setProvee(Proveedor provee) {
+        this.provee = provee;
+    }
     
     public producto(){
-        Nombre= null;
-        Descripcion = null;
-        
-        Imagen = null;
-        Esp = null;
-      Prec = null; 
+        Nombre= "-";
+        NumRef=0;
+        Descripcion = "-";
+        Imagen = new LinkedList();
+        Esp = new Especificacion();
+        Prec =new Money(); 
+        provee = new Proveedor();
+        hojas = new LinkedList();
        
     }
-    public void setDatosProd(String Nombre, int NumRef, String Descripcion, Especificacion Especif , Money precio, String Imagen){
+    public void setDatosProd(String Nombre, int NumRef, String Descripcion, Especificacion Especif , Money precio, Proveedor proveedor, List<String> Imagen,List<Hoja> hojas){
+    
         this.Nombre = Nombre;
         this.NumRef = NumRef;
         this.Descripcion = Descripcion;
         this.Esp = Especif;
-      this.Prec = precio;
+        this.Prec = precio;
+        this.provee = proveedor;
+        this.Imagen = Imagen;
+        this.hojas = hojas;
         
     }
     
-    /* public producto(String nom, int numRef, String desc, ListaEspecificaciones listEsp, Money prec, String imag){
-        this.Nombre= nom;
-        this.NumRef= numRef;
-        this.Descripcion= desc;
-         //   this.Precio = prec;
-        this.Imagen =imag;
-      
-      
-    }*/
     
     public String getNombre(){
        return Nombre;
@@ -71,11 +95,12 @@ public class producto {
         this.Prec = Prec;
     }
     
+    public Proveedor DatoProveedor(producto p){
+        return provee;
+    }
     
-  /*  public Money getPrecio(){
-       return Precio;
-          }*/
-    public String getImagen(){
+ 
+    public List<String> getImagen(){
        return Imagen;
           }
     public void setNombre(String nom){
@@ -93,7 +118,7 @@ public class producto {
     /*public void setPrecio(Money prec){
       this.Prec = prec;
             }*/
-    public void setImagen(String imag){
+    public void setImagen(List<String> imag){
        this.Imagen = imag;
             }
     
@@ -108,7 +133,7 @@ public class producto {
     public DataProducto getDataProd(){
    
    DataProducto dpr = new DataProducto();
-   dpr.setDataProd(Nombre, NumRef, Descripcion, Esp , Prec, Imagen);
+   dpr.setDataProd(Nombre, NumRef, Descripcion, Esp , Prec, provee, Imagen);
    return dpr;
    }
 }
